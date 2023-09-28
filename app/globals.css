@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --color-bg-sidebar: #FFF;
+    --color-bg-body: #e8e9ea;
+
+    --color-text-body: #64748b;
+    --color-text-primary: #1e6af6;
+}
+
+a {
+    color: var(--color-text-primary);
+}
+
+.bg-body {
+    background: var(--color-bg-body);
+}
+
+.bg-sidebar {
+    background: var(--color-bg-sidebar);
+}
+
+.text-body {
+    color: var(--color-text-body);
+}
