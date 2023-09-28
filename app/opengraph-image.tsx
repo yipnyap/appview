@@ -6,10 +6,6 @@ export const alt = "Yipnyap";
 export const contentType = "image/png";
 
 export default async function OG() {
-  const lexend = await fetch(
-    new URL("./fonts/SF-Pro-Display-Medium.otf", import.meta.url),
-  ).then((res) => res.arrayBuffer());
-
   return new ImageResponse(
     (
       <div
@@ -49,12 +45,12 @@ export default async function OG() {
     {
       width: 1200,
       height: 630,
-      fonts: [
-        {
-          name: "Lexend",
-          data: lexend,
-        },
-      ],
+      // fonts: [
+      //   {
+      //     name: "Lexend",
+      //     data: lexend,
+      //   },
+      // ],
     },
   );
 }
