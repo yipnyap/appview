@@ -3,7 +3,7 @@ import React from 'react'
 export const Logo = ({...props}) => {
     return (
         <div className={`${props.className} flex`}>
-            <svg viewBox="0 0 32 22" aria-hidden="true" {...props}>
+            <svg viewBox="0 0 28 22" aria-hidden="true" {...props}>
                 <linearGradient id="grad1" x1="0%" x2="100%" y1="0%" y2="100%">
                     <stop offset="0%" stopColor="#60a5fa"></stop>
                     <stop offset="100%" stopColor="#34d399"></stop>

@@ -10,7 +10,7 @@
     --color-text-primary: #1e6af6;
 }
 
-a {
+a:not(.no-style) {
     color: var(--color-text-primary);
 }
 

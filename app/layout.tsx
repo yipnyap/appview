@@ -5,6 +5,7 @@ import { lexend, inter } from "./fonts";
 import {Logo} from '@/components/shared/icons/logo'
 import Link from 'next/link'
 import Preload from '@/components/onboard/preload'
+import {Home} from 'lucide-react'
 
 export const metadata = {
   title: "Yipnyap",
@@ -30,9 +31,12 @@ export default async function RootLayout({
     <html lang="en">
       <body className={`${cx(lexend.variable, inter.variable)} text-body`}>
         <div className="flex bg-body">
-          <div className="flex flex-col sticky top-0 justify-center items-center h-[100vh] w-16 border-r border-grey-100 bg-sidebar">
+          <div className="flex flex-col sticky top-0 justify-center items-center gap-y-4 h-[100vh] w-16 border-r border-gray-100 bg-sidebar">
             <Link href="/">
               <Logo className="w-8" />
+            </Link>
+            <Link href="/" className="no-style hover:text-gray-500/75">
+              <Home className="w-8" />
             </Link>
           </div>
           <div className="flex-shrink-0 w-[calc(100%-64px)] grid items-center justify-center py-32">
