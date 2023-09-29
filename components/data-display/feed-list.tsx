@@ -103,7 +103,7 @@ export default function FeedList({...props}: {
                             <ResponsiveMasonry
                                 columnsCountBreakPoints={{350: 1, 750: 2, 900: 3, 1200: 4}}>
                                 {/* @ts-ignore */}
-                                <Masonry gutter="24px">
+                                <Masonry className="list-stagger" gutter="24px">
                                     <div className="max-w-md h-fit bg-card flex flex-col px-3 py-4 border border-solid rounded-default">
                                         <Heading>Welcome to Yipnyap!</Heading>
                                         <Text size="sm">

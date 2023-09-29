@@ -30,3 +30,17 @@ a:not(.no-style) {
 .text-body {
     color: var(--color-text-body);
 }
+
+.list-stagger > * {
+    & > * {
+        $n: 10;
+        opacity: 0;
+        @apply animate-slide-up-fade;
+
+        @for $x from 0 through $n {
+            &:nth-child(#{$x}) {
+                animation-delay: 100ms * ($x - 1) !important;
+            }
+        }
+    }
+}

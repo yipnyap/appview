@@ -1,4 +1,4 @@
-import "./globals.css";
+import "./globals.scss";
 import { Analytics } from "@vercel/analytics/react";
 import cx from "classnames";
 import { lexend, inter } from "./fonts";
