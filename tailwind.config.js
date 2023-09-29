@@ -8,6 +8,12 @@ module.exports = {
   },
   theme: {
     extend: {
+      padding: {
+        lg: "8rem",
+      },
+      borderRadius: {
+        default: "0.75rem",
+      },
       fontFamily: {
         default: ["var(--font-lexend)", "system-ui", "sans-serif"],
         // default: ["var(--font-inter)", "system-ui", "sans-serif"],

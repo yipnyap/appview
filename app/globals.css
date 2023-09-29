@@ -3,10 +3,11 @@
 @tailwind utilities;
 
 :root {
+    --color-bg-body: #fafafa;
+    --color-bg-card: #FFF;
     --color-bg-sidebar: #FFF;
-    --color-bg-body: #e8e9ea;
 
-    --color-text-body: #64748b;
+    --color-text-body: #525252;
     --color-text-primary: #1e6af6;
 }
 
@@ -16,6 +17,10 @@ a:not(.no-style) {
 
 .bg-body {
     background: var(--color-bg-body);
+}
+
+.bg-card {
+    background: var(--color-bg-card);
 }
 
 .bg-sidebar {

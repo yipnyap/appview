@@ -1,7 +1,7 @@
+import FeedList from '@/components/data-display/feed-list'
+
 export default async function Home() {
   return (
-    <>
-        yo.
-    </>
+    <FeedList feedID="Guest" />
   );
 }
