@@ -13,6 +13,7 @@ import {Listbox, Transition} from '@headlessui/react'
 import {LayoutDashboard} from 'lucide-react'
 import WireframeGrid from '@/components/shared/icons/wireframe-grid'
 import WireframeList from '@/components/shared/icons/wireframe-list'
+import Card from '@/components/shared/card'
 
 export default function FeedList({...props}: {
     feedID: string;
@@ -54,7 +55,7 @@ export default function FeedList({...props}: {
     const LoadingCard = () => {
         return (
             <GridBody className="justify-center items-center h-full">
-                <div className="max-w-md h-fit bg-card flex flex-col px-3 py-4 gap-2 border border-solid rounded-default">
+                <Card>
                     <Image src="/dog-on-ship.gif"
                            alt="Animated pixel dog in box panting before falling over, then looping."
                            height={128}
@@ -69,7 +70,7 @@ export default function FeedList({...props}: {
                     <Text size="sm">
                         Loading posts for @<span className="font-bold">{feedID}</span>
                     </Text>
-                </div>
+                </Card>
             </GridBody>
         )
     }
@@ -104,11 +105,19 @@ export default function FeedList({...props}: {
                                 columnsCountBreakPoints={{350: 1, 750: 2, 900: 3, 1200: 4}}>
                                 {/* @ts-ignore */}
                                 <Masonry className="list-stagger" gutter="24px">
-                                    <div className="max-w-md h-fit bg-card flex flex-col px-3 py-4 border border-solid rounded-default">
+                                    <div className="max-w-md h-fit bg-card flex flex-col px-3 py-4 border rounded-default">
                                         <Heading>Welcome to Yipnyap!</Heading>
                                         <Text size="sm">
                                             This is your feed. It{'\''}s a collection of posts from people you follow.<br/>
                                             <span className="font-bold">Try following someone!</span>
+                                        </Text>
+                                    </div>
+                                    <></>
+                                    <></>
+                                    <div className="max-w-md h-fit bg-card flex flex-col px-3 py-4 border rounded-default">
+                                        <Heading size="xs">Active Groups</Heading>
+                                        <Text size="sm">
+                                            blah, blah.
                                         </Text>
                                     </div>
 
@@ -164,7 +173,7 @@ function FeedViewListbox() {
                                     <div
                                         className={`flex flex-col items-center gap-2 p-2 cursor-pointer ${active ? 'rounded bg-neutral-100 dark:bg-neutral-800' : ''} ${selected ? 'font-bold' : ''}`}
                                     >
-                                        <view.icon className="w-24 border border-neutral-200 rounded-default" />
+                                        <view.icon className="w-24 border rounded-default" />
                                         <span>{view.name}</span>
                                     </div>
                                 )}
