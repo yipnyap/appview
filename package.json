@@ -13,6 +13,8 @@
   "dependencies": {
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.0.18",
+    "@radix-ui/react-avatar": "^1.0.4",
+    "@radix-ui/react-hover-card": "^1.0.7",
     "@radix-ui/react-popover": "^1.0.2",
     "@radix-ui/react-tooltip": "^1.0.2",
     "@skiff-org/skiff-ui": "latest",
@@ -37,7 +39,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-infinite-scroll-component": "^6.1.0",
-    "react-markdown": "^8.0.4",
+    "react-markdown": "^9.0.0",
     "react-responsive-masonry": "^2.1.7",
     "react-wrap-balancer": "^0.3.0",
     "sass": "^1.68.0",

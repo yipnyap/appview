@@ -12,11 +12,10 @@ import {
     UserGroupIcon,
     HandThumbUpIcon,
 } from "@heroicons/react/24/solid";
-import {XMarkIcon} from "@heroicons/react/24/outline";
-import Modal from '@/components/shared/modal'
 import Link from 'next/link';
 import Image from 'next/image';
-import {Avatar, Size} from '@skiff-org/skiff-ui'
+import UserAvatar from '@/components/shared/user/avatar'
+import UserInfoCol from '@/components/shared/user/info-col'
 
 export declare interface NGFeedPostDataType {
     id: string;
@@ -100,7 +99,7 @@ export default function FeedPost({...props}: NGFeedPostType) {
                             <div className="flex items-center text-sm mb-6">
                                 <ArrowUpOnSquareIcon className="w-4 h-4 mr-2" />
                                 <Link href={`/@${postContent?.sharingUser?.username}/`} className="flex gap-2 items-center text-default-alt">
-                                    <Avatar rounded imageSrc={postContent?.sharingUser?.avatar || ''} label={postContent?.sharingUser?.username || ''} />
+                                    <UserAvatar user={postContent.sharingUser} />
                                     {postContent?.sharingUser?.username} rehowled
                                 </Link>
                             </div>
@@ -109,29 +108,12 @@ export default function FeedPost({...props}: NGFeedPostType) {
                             <div className="flex items-center text-sm mb-6">
                                 <UserGroupIcon className="w-4 h-4 mr-2" />
                                 <Link href={`/pack/@${postContent?.group.GroupMeta?.slug}/`} className="flex gap-2 items-center text-default-alt">
-                                    <Avatar imageSrc={postContent?.group.GroupMeta?.avatar || ''} label={postContent.group.groupMeta?.name} />
+                                    <UserAvatar user={postContent?.group.GroupMeta} />
                                     {postContent?.group.GroupMeta?.name}
                                 </Link>
                             </div>
                         )}
-                        <div className="flex space-x-3">
-                            <div className="flex-shrink-0">
-                                <Avatar rounded imageSrc={postContent.user.avatar} label={postContent.user.username} size={Size.LARGE} />
-                            </div>
-                            <div className="min-w-0 flex-1 flex flex-col justify-center">
-                                <a href={`/@${postContent.user.username}/`} className="font-medium text-default cursor-pointer hover:underline">
-                                    {postContent.user.display_name || postContent.user.username}
-                                </a>
-                                {postContent.timestamp && (
-                                    <a href={`/@!${postContent.id}`} className="text-sm text-default-alt cursor-pointer hover:underline">
-                                        <time
-                                            dateTime={(postContent.timestamp * 1000).toString()}>
-                                            {ms(postContent.timestamp * 1000, { long: true })}
-                                        </time>
-                                    </a>
-                                )}
-                            </div>
-                        </div>
+                        <UserInfoCol user={postContent.user} />
                     </div>
 
                     {/* Post Objects (Images) */}
