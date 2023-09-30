@@ -63,6 +63,7 @@ export declare interface NGFeedPostDataType {
 export declare interface NGFeedPostType {
     post: NGFeedPostDataType;
     onDelete?: Function;
+    noDrawer?: boolean;
 
     theme?: any;
     children?: React.ReactNode;
@@ -118,9 +119,32 @@ export default function FeedPost({...props}: NGFeedPostType) {
                     </div>
 
                     {/* @todo: this doesn't scale. make it scale :) */}
-                    <Drawer.Root shouldScaleBackground>
-                        <Drawer.Trigger>
-                            {/* Post Objects (Images) */}
+                    {!props.noDrawer ? (
+                        <Drawer.Root shouldScaleBackground>
+                            <Drawer.Trigger>
+                                {/* Post Objects (Images) */}
+                                {postContent?.objects && postContent.objects.length > 0 && (
+                                    <MediaGrid objects={postContent.objects} selectState={[selectedMedia, setSelectedMedia]} post={postContent} truncate />
+                                )}
+
+                                <div
+                                    className="min-h-fit w-full pb-3 px-4 cursor-pointer">
+                                    <div
+                                        className="text-sm text-start text-body space-y-4">
+                                        {props.children}
+                                    </div>
+                                </div>
+                            </Drawer.Trigger>
+                            <Drawer.Portal>
+                                <Drawer.Content className="drawer">
+                                    <div className="overflow-y-auto">
+                                        <FeedPost noDrawer {...props} />
+                                    </div>
+                                </Drawer.Content>
+                            </Drawer.Portal>
+                        </Drawer.Root>
+                    ) : (
+                        <>
                             {postContent?.objects && postContent.objects.length > 0 && (
                                 <MediaGrid objects={postContent.objects} selectState={[selectedMedia, setSelectedMedia]} post={postContent} truncate />
                             )}
@@ -132,15 +156,8 @@ export default function FeedPost({...props}: NGFeedPostType) {
                                     {props.children}
                                 </div>
                             </div>
-                        </Drawer.Trigger>
-                        <Drawer.Portal>
-                            <Drawer.Content className="fixed flex flex-col bg-card border border-b-none rounded-t-[10px] bottom-0 left-0 right-0 h-fit max-h-[97%] mx-[-1px] md:mx-auto md:max-w-sm lg:max-w-md xl:max-w-lg">
-                                <div className="overflow-y-auto">
-                                    <FeedPost {...props} />
-                                </div>
-                            </Drawer.Content>
-                        </Drawer.Portal>
-                    </Drawer.Root>
+                        </>
+                    )}
 
                     {/* Floating "User is typing..." card */}
                     {/*<div className="absolute bottom-0 left-0 ml-4 sm:ml-6 bg-box-alt border-x border-t border-b-0 border-solid border-neutral-300 dark:border-neutral-700 rounded-tl-xl rounded-tr-xl">*/}

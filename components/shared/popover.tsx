@@ -3,7 +3,7 @@
 import { Dispatch, SetStateAction, ReactNode } from "react";
 import * as PopoverPrimitive from "@radix-ui/react-popover";
 import useWindowSize from "@/lib/hooks/use-window-size";
-import Leaflet from "./leaflet";
+import { Drawer } from "vaul";
 
 export default function Popover({
   children,
@@ -22,9 +22,17 @@ export default function Popover({
   if (!isMobile && !isDesktop) return <>{children}</>;
   return (
     <>
-      {isMobile && children}
-      {openPopover && isMobile && (
-        <Leaflet setShow={setOpenPopover}>{content}</Leaflet>
+      {isMobile && (
+          <Drawer.Root open={openPopover} onOpenChange={setOpenPopover}>
+            <Drawer.Trigger>
+              {children}
+            </Drawer.Trigger>
+            <Drawer.Portal>
+              <Drawer.Content className="drawer">
+                {content}
+              </Drawer.Content>
+            </Drawer.Portal>
+          </Drawer.Root>
       )}
       {isDesktop && (
         <PopoverPrimitive.Root
@@ -37,7 +45,7 @@ export default function Popover({
           <PopoverPrimitive.Content
             sideOffset={4}
             align={align}
-            className="z-20 animate-slide-up-fade items-center rounded-md border border-neutral-200 bg-white drop-shadow-lg"
+            className="overflow-hidden z-20 animate-slide-up-fade items-center rounded border border-neutral-200 bg-white drop-shadow-lg"
           >
             {content}
           </PopoverPrimitive.Content>

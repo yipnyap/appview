@@ -86,3 +86,7 @@ a:not(.no-style) {
     @apply blur-[1px];
     opacity: 0.75;
 }
+
+.drawer {
+    @apply fixed flex flex-col bg-card border border-b-0 rounded-t-[10px] bottom-0 left-0 right-0 h-fit max-h-[97%] mx-[-1px] md:mx-auto md:max-w-sm lg:max-w-md xl:max-w-lg;
+}
