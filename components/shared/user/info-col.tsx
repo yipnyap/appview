@@ -1,51 +1,71 @@
+'use client'
+
 import UserAvatar from '@/components/shared/user/avatar'
 // @ts-ignore
 import * as HoverCard from '@radix-ui/react-hover-card';
+import {Drawer} from 'vaul';
 import Card from '@/components/shared/card'
 import {Heading} from '@/components/shared/text'
 import {LoadingSpinner} from '@/components/shared/icons'
 import Markdown from 'react-markdown'
+import {useState} from 'react'
+import clsx from 'clsx'
+import ProfileHeader from '@/components/shared/user/header'
 
 export default function UserInfoCol({ user, size }: {
     user: any; // object
     size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 }) {
-    return (
-        <HoverCard.Root>
-            <HoverCard.Trigger asChild>
-                <div className="flex flex-row gap-2">
-                    <UserAvatar user={user} size={size} />
-                    <div className="flex flex-col gap-1">
-                        <span className="text-sm font-semibold">{user.username || user.avatar}</span>
-                        <span className="text-xs text-neutral-500/50">{user.tag || 'piss'}</span>
-                    </div>
-                </div>
-            </HoverCard.Trigger>
-            <HoverCard.Portal>
-                <HoverCard.Content side="bottom" align="start" sideOffset={5}>
-                    <Card className="shadow w-fit">
-                        {/* @todo: load from api? */}
-                        {/*<LoadingSpinner />*/}
-                        <div className="flex flex-col justify-center gap-2">
-                            <div className="flex flex-row gap-2">
-                                <UserAvatar user={user} size="lg" />
-                                <div className="flex flex-col">
-                                    <Heading>{user.username || user.avatar}</Heading>
-                                    <span className="text-neutral-500/50">{user.tag || 'piss'}</span>
-                                </div>
-                            </div>
+    const [snap, setSnap] = useState<number | string | null>('148px');
 
-                            <div className="flex flex-row gap-2">
-                                <p className="text-sm">
-                                    <Markdown>
-                                        {user.bio || 'They haven\'t written anything yet, but they\'re probably pretty cool.'}
-                                    </Markdown>
-                                </p>
+    return (
+        <Drawer.Root
+            snapPoints={['355px', '640px', 1]}
+            activeSnapPoint={snap}
+            setActiveSnapPoint={setSnap}
+            shouldScaleBackground
+        >
+            <Drawer.Trigger>
+                <HoverCard.Root>
+                    <HoverCard.Trigger asChild>
+                        <UserInfo user={user} size={size} />
+                    </HoverCard.Trigger>
+                    <HoverCard.Portal>
+                        <HoverCard.Content side="bottom" align="start" sideOffset={5}>
+                            <div className="max-w-md w-fit h-fit">
+                                <ProfileHeader user={user} />
                             </div>
-                        </div>
-                    </Card>
-                </HoverCard.Content>
-            </HoverCard.Portal>
-        </HoverCard.Root>
+                        </HoverCard.Content>
+                    </HoverCard.Portal>
+                </HoverCard.Root>
+            </Drawer.Trigger>
+            <Drawer.Portal>
+                <Drawer.Content className="fixed flex flex-col bg-card border border-b-none rounded-t-[10px] bottom-0 left-0 right-0 h-full max-h-[97%] mx-[-1px] md:mx-auto md:max-w-sm lg:max-w-md xl:max-w-lg">
+                    <div
+                        className={clsx('flex flex-col w-full', {
+                            "overflow-y-auto": snap === 1,
+                            "overflow-hidden": snap !== 1,
+                        })}
+                    >
+                        <ProfileHeader user={user} />
+                    </div>
+                </Drawer.Content>
+            </Drawer.Portal>
+        </Drawer.Root>
+    )
+}
+
+export function UserInfo({ user, size }: {
+    user: any; // object
+    size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+}) {
+    return (
+        <div className="flex flex-row gap-2">
+            <UserAvatar user={user} size={size} />
+            <div className="flex flex-col gap-1">
+                <span className="text-sm font-semibold">{user.username || user.avatar}</span>
+                <span className="self-baseline text-xs text-neutral-500/50">{user.tag || 'piss'}</span>
+            </div>
+        </div>
     )
 }

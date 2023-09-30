@@ -74,3 +74,15 @@ a:not(.no-style) {
         }
     }
 }
+
+[vaul-drawer-wrapper] {
+    transition-property: opacity, transform, border-radius !important;
+    transition-duration: 0.5s !important;
+    transition-timing-function: cubic-bezier(0.32, 0.72, 0, 1) !important;
+    overflow: auto !important;
+}
+
+[vaul-drawer-wrapper][aria-hidden='true'] {
+    @apply blur-[1px];
+    opacity: 0.75;
+}

@@ -32,8 +32,7 @@ export default async function RootLayout({
     return (
         <html lang="en">
         <body className={`${cx(lexend.variable, inter.variable)} font-default font-normal text-body`}>
-        <Toaster className="dark:hidden" position="top-center" toastOptions={{
-        }}/>
+        <Toaster className="dark:hidden" position="top-center" />
         <Toaster className="hidden dark:block" position="top-center" toastOptions={{
             style: {
                 background: colors.neutral['800'],
@@ -42,8 +41,8 @@ export default async function RootLayout({
             }
         }} />
 
-        <div className="flex bg-body">
-            <div className="flex flex-col sticky top-0 justify-center items-center gap-y-4 h-[100vh] w-16 border-r border-neutral-100 bg-sidebar">
+        <div vaul-drawer-wrapper="" id="BodyScroll" className="flex h-full bg-body">
+            <div className="flex flex-col fixed top-0 justify-center items-center gap-y-4 h-[100vh] w-16 border-r border-neutral-100 bg-sidebar">
                 <Link href="/">
                     <Logo className="w-8" />
                 </Link>
@@ -52,7 +51,7 @@ export default async function RootLayout({
                 </Link>
             </div>
 
-            <div className="flex-shrink-0 w-[calc(100%-64px)]">
+            <div className="flex-shrink-0 w-full h-[100vh] pl-16">
                 <Preload>
                     {children}
                 </Preload>

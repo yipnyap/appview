@@ -14,6 +14,7 @@ import {LayoutDashboard} from 'lucide-react'
 import WireframeGrid from '@/components/shared/icons/wireframe-grid'
 import WireframeList from '@/components/shared/icons/wireframe-list'
 import Card from '@/components/shared/card'
+import {Drawer} from 'vaul'
 
 export default function FeedList({...props}: {
     feedID: string;
@@ -25,6 +26,7 @@ export default function FeedList({...props}: {
     const [postsHasMore, setPostsHasMore] = useState<boolean>(false);
     const [postsCurrentPage, setPostsCurrentPage] = useState<number>(1);
     const [posts, setPosts] = useState<any>([]);
+    const [selectedPost, setSelectedPost] = useState<string | null>(null)
 
     useEffect(() => {
         if (props.feedID !== feedID) {
@@ -93,6 +95,7 @@ export default function FeedList({...props}: {
                             next={fetchPosts}
                             hasMore={postsHasMore}
                             loader={<LoadingCard />}
+                            scrollableTarget="BodyScroll"
                             endMessage={
                                 <p className="text-sm text-neutral-500 text-center">
                                     And just like that, you{'\''}ve reached the end of it all.<br/>
