@@ -9,12 +9,11 @@ import {fetcher} from '@/lib/utils'
 import FeedPost from './feed-post';
 import {Heading, Text} from '@/components/shared/text'
 import GridBody from '@/components/layout/grid-body'
-import {Listbox, Transition} from '@headlessui/react'
 import {LayoutDashboard} from 'lucide-react'
 import WireframeGrid from '@/components/shared/icons/wireframe-grid'
 import WireframeList from '@/components/shared/icons/wireframe-list'
 import Card from '@/components/shared/card'
-import {Drawer} from 'vaul'
+import Popover from '@/components/shared/popover'
 
 export default function FeedList({...props}: {
     feedID: string;
@@ -151,40 +150,33 @@ const views = [
 
 function FeedViewListbox() {
     const [selectedView, setSelectedView] = useState(views[1])
+    const [open, setOpen] = useState(false)
 
     return (
         <div className="relative">
-            <Listbox value={selectedView} onChange={setSelectedView}>
-                <Listbox.Button>
-                    <LayoutDashboard className="w-8 h-8" />
-                </Listbox.Button>
-                <Transition
-                    as={Fragment}
-                    leave="transition ease-in duration-100"
-                    leaveFrom="opacity-100"
-                    leaveTo="opacity-0"
-                >
-                    <Listbox.Options className="absolute right-0 z-10 flex gap-4 bg-card px-3 py-4 shadow border border-neutral-200 rounded-default">
+            <Popover
+                content={
+                    <div className="flex gap-4 bg-card px-3 py-4">
                         {views.map((view) => (
-                            <Listbox.Option
+                            <div
                                 key={view.id}
-                                value={view}
-                                disabled={view.unavailable}
                             >
-                                {({ selected, active }) => (
-                                    // SVG Wireframe on top with text below
-                                    <div
-                                        className={`flex flex-col items-center gap-2 p-2 cursor-pointer ${active ? 'rounded bg-neutral-100 dark:bg-neutral-800' : ''} ${selected ? 'font-bold' : ''}`}
-                                    >
-                                        <view.icon className="w-24 border rounded-default" />
-                                        <span>{view.name}</span>
-                                    </div>
-                                )}
-                            </Listbox.Option>
+                                <div
+                                    className={`flex flex-col items-center gap-2 p-2 cursor-pointer`}
+                                >
+                                    <view.icon className="w-24 border rounded-default" />
+                                    <span>{view.name}</span>
+                                </div>
+                            </div>
                         ))}
-                    </Listbox.Options>
-                </Transition>
-            </Listbox>
+                    </div>
+                }
+                align="end"
+                openPopover={open}
+                setOpenPopover={setOpen}
+            >
+                <LayoutDashboard className="w-8 h-8 cursor-pointer" />
+            </Popover>
         </div>
     )
 }
