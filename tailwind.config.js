@@ -2,6 +2,7 @@
 const plugin = require("tailwindcss/plugin");
 
 module.exports = {
+  darkMode: "class",
   content: ["./app/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
   future: {
     hoverOnlyWhenSupported: true,
@@ -27,6 +28,11 @@ module.exports = {
         "slide-down-fade": "slide-down-fade 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
       },
       keyframes: {
+        shimmer: {
+          '100%': {
+            transform: 'translateX(100%)',
+          },
+        },
         // Fade up and down
         "fade-up": {
           "0%": {

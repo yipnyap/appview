@@ -92,31 +92,7 @@ export default function FeedPost({...props}: NGFeedPostType) {
 
     return (
         <>
-            {selectedMedia && (
-                <div className="absolute z-50 top-0 left-0 w-screen h-screen">
-                    <Modal showModal={slideoverMediaOpen} setShowModal={setSlideoverMediaOpen}>
-                        <div className="absolute opacity-0 md:opacity-100 top-0 right-0 flex p-4 z-50 mix-blend-difference">
-                            <button
-                                type="button"
-                                className="rounded-md text-default hover:text-white focus:outline-none focus:ring-2 focus:ring-white"
-                                onClick={() => setSlideoverMediaOpen(false)}
-                            >
-                                <span className="sr-only">Close panel</span>
-                                <XMarkIcon className="h-6 w-6" aria-hidden="true" />
-                            </button>
-                        </div>
-                        <div className="w-full h-auto">
-                            <img
-                                src={selectedMedia?.url}
-                                alt=""
-                                className="h-full"
-                            />
-                        </div>
-                    </Modal>
-                </div>
-            )}
-
-            <div className={`max-w-md h-fit bg-card flex flex-col border border-solid rounded-default`}>
+            <div className={`max-w-md h-fit bg-card flex flex-col border rounded-default`}>
                 <div className="relative">
                     <div className="px-4 py-5">
                         {/* "___ Rehowled" */}
@@ -166,7 +142,7 @@ export default function FeedPost({...props}: NGFeedPostType) {
                     <div
                         className="min-h-fit w-full pb-3 px-4 cursor-pointer">
                         <div
-                            className="text-sm text-neutral-700 space-y-4 dark:text-neutral-50">
+                            className="text-sm text-body space-y-4">
                             {props.children}
                         </div>
                     </div>
@@ -189,7 +165,7 @@ export default function FeedPost({...props}: NGFeedPostType) {
                 </div>
 
                 {/* Footer - Like & Share on left, rest of space taken up by a reply textbox with send icon on right */}
-                <div className="px-4 py-4 sm:px-6 flex justify-between space-x-8 bg-box-alt border-t border-x-0 border-b-0 border-solid border-neutral-300 dark:border-neutral-700">
+                <div className="px-4 py-4 sm:px-6 flex justify-between space-x-8 bg-box-alt border-t border-x-0 border-b-0 border-solid">
                     <div className="flex space-x-6">
                         <span
                             className="inline-flex items-center text-sm cursor-pointer hover:underline"
@@ -209,7 +185,6 @@ export default function FeedPost({...props}: NGFeedPostType) {
 }
 
 function CommentBox({...props}: any) {
-    const [postContent, setPostContent] = props.post;
     const [commentSubmitting, setCommentSubmitting] = useState(false);
     const commentRef = useRef<HTMLInputElement>(null);
 
@@ -233,7 +208,7 @@ function CommentBox({...props}: any) {
                     type="text"
                     name="comment"
                     id="comment"
-                    className="block w-full bg-body rounded-lg border border-neutral-200 placeholder:text-neutral-400 sm:text-sm focus:ring-primary"
+                    className="block w-full bg-body rounded-lg border placeholder:text-neutral-400 sm:text-sm focus:ring-primary"
                     placeholder="Comment"
                     ref={commentRef}
                 />
@@ -256,9 +231,9 @@ function CommentBox({...props}: any) {
 
 function FeedListItem({...props}: any) {
     const {reply, showLine, post} = props;
-    const [likes, setLikes] = useState(reply.likes || 0);
+    const [likes,] = useState(reply.likes || 0);
     const [showReplyBox, setShowReplyBox] = useState(false);
-    const [postContent, setPostContent] = post;
+    const [, setPostContent] = post;
 
     if (reply.id.indexOf(':') > -1) {
         reply.id = reply.id.split(':')[1]
@@ -406,8 +381,7 @@ function RecursiveCommentThread({...props}: any) {
 }
 
 function MediaGrid({...props}: any) {
-    const {objects, truncate} = props;
-    const [, setSelectedMedia] = props.selectState;
+    const {objects} = props;
 
     return (
         <div className="pb-5">
