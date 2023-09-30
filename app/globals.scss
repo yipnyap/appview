@@ -2,33 +2,63 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-    --color-bg-body: #fafafa;
-    --color-bg-card: #FFF;
-    --color-bg-sidebar: #FFF;
+$colors: (
+        'bg-body': #fafafa,
+        'bg-card': #FFF,
+        'bg-sidebar': #FFF,
 
-    --color-text-body: #525252;
-    --color-text-primary: #1e6af6;
+        'text-body': #525252,
+        'text-primary': #1e6af6,
+
+        'border-default': #e5e5e5,
+);
+
+$colors-dark: (
+        'bg-body': #1e1e1e,
+        'bg-card': #2a2a2a,
+        'bg-sidebar': #2a2a2a,
+
+        'text-body': #FFF,
+        'text-primary': #1e6af6,
+
+        'border-default': #2e2e2e,
+);
+
+body:not(.dark) {
+    @each $color, $value in $colors {
+        --color-#{$color}: #{$value};
+    }
+}
+
+body.dark {
+    @each $color, $value in $colors-dark {
+        --color-#{$color}: #{$value};
+    }
+}
+
+@layer base {
+    *,
+    ::before,
+    ::after {
+        @apply border-[var(--color-border-default)];
+    }
 }
 
 a:not(.no-style) {
     color: var(--color-text-primary);
 }
 
-.bg-body {
-    background: var(--color-bg-body);
-}
-
-.bg-card {
-    background: var(--color-bg-card);
-}
-
-.bg-sidebar {
-    background: var(--color-bg-sidebar);
-}
-
-.text-body {
-    color: var(--color-text-body);
+@each $color, $value in $colors {
+    // check if starts with bg
+    .#{$color} {
+        @if str-slice($color, 0, 2) == 'bg' {
+            background-color: var(--color-#{$color});
+        } @elseif str-slice($color, 0, 4) == 'text' {
+            color: var(--color-#{$color});
+        } @elseif str-slice($color, 0, 6) == 'border' {
+            border-color: var(--color-#{$color});
+        }
+    }
 }
 
 .list-stagger > * {
