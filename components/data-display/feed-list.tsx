@@ -14,6 +14,7 @@ import WireframeGrid from '@/components/shared/icons/wireframe-grid'
 import WireframeList from '@/components/shared/icons/wireframe-list'
 import Card from '@/components/shared/card'
 import Popover from '@/components/shared/popover'
+import {useUIStore} from '@/lib/states'
 
 export default function FeedList({...props}: {
     feedID: string;
@@ -25,7 +26,11 @@ export default function FeedList({...props}: {
     const [postsHasMore, setPostsHasMore] = useState<boolean>(false);
     const [postsCurrentPage, setPostsCurrentPage] = useState<number>(1);
     const [posts, setPosts] = useState<any>([]);
-    const [selectedPost, setSelectedPost] = useState<string | null>(null)
+    const [masonryColumns, setMasonryColumns] = useState<{
+        [key: number]: number;
+    }>({350: 1, 750: 2, 900: 3, 1200: 4});
+
+    const FeedViewConfig = useUIStore(state => state.feedView);
 
     useEffect(() => {
         if (props.feedID !== feedID) {
@@ -42,6 +47,18 @@ export default function FeedList({...props}: {
     useEffect(() => {
         fetchPosts();
     }, [feedID]);
+
+    useEffect(() => {
+        switch (FeedViewConfig) {
+            default:
+            case 1:
+                setMasonryColumns({350: 1, 750: 2, 900: 3, 1200: 4});
+                break;
+            case 2:
+                setMasonryColumns({350: 1});
+                break;
+        }
+    }, [FeedViewConfig]);
 
     const fetchPosts = () => {
         const feed = props.feedID === 'Guest' ? '' : props.feedID;
@@ -87,48 +104,52 @@ export default function FeedList({...props}: {
                         <FeedViewListbox />
                     </div>
 
-                    {posts.length !== 0 && (
-                        <InfiniteScroll
-                            key={feedID}
-                            dataLength={posts.length}
-                            next={fetchPosts}
-                            hasMore={postsHasMore}
-                            loader={<LoadingCard />}
-                            endMessage={
-                                <p className="text-sm text-neutral-500 text-center">
-                                    And just like that, you{'\''}ve reached the end of it all.<br/>
-                                    <span className="font-bold">No more posts to show.</span>
-                                </p>
-                            }
-                        >
-                            {/* @ts-ignore */}
-                            <ResponsiveMasonry
-                                columnsCountBreakPoints={{350: 1, 750: 2, 900: 3, 1200: 4}}>
+                    {/* Center feed */}
+                    <div className={FeedViewConfig !== 1 ? 'sm:flex sm:justify-center' : ''}>
+                        {posts.length !== 0 && (
+                            <InfiniteScroll
+                                key={feedID}
+                                className={FeedViewConfig !== 1 ? 'sm:max-w-md sm:w-screen' : ''}
+                                dataLength={posts.length}
+                                next={fetchPosts}
+                                hasMore={postsHasMore}
+                                loader={<LoadingCard />}
+                                endMessage={
+                                    <p className="text-sm text-neutral-500 text-center">
+                                        And just like that, you{'\''}ve reached the end of it all.<br/>
+                                        <span className="font-bold">No more posts to show.</span>
+                                    </p>
+                                }
+                            >
                                 {/* @ts-ignore */}
-                                <Masonry className="list-stagger" gutter="24px">
-                                    <div className="max-w-md h-fit bg-card flex flex-col px-3 py-4 border rounded-default">
-                                        <Heading>Welcome to Yipnyap!</Heading>
-                                        <Text size="sm">
-                                            This is your feed. It{'\''}s a collection of posts from people you follow.<br/>
-                                            <span className="font-bold">Try following someone!</span>
-                                        </Text>
-                                    </div>
-                                    <></>
-                                    <></>
-                                    <div className="max-w-md h-fit bg-card flex flex-col px-3 py-4 border rounded-default">
-                                        <Heading size="xs">Active Groups</Heading>
-                                        <Text size="sm">
-                                            blah, blah.
-                                        </Text>
-                                    </div>
+                                <ResponsiveMasonry
+                                    columnsCountBreakPoints={masonryColumns}>
+                                    {/* @ts-ignore */}
+                                    <Masonry className="list-stagger" gutter="24px">
+                                        <div className="max-w-md h-fit bg-card flex flex-col px-3 py-4 border rounded-default">
+                                            <Heading>Welcome to Yipnyap!</Heading>
+                                            <Text size="sm">
+                                                This is your feed. It{'\''}s a collection of posts from people you follow.<br/>
+                                                <span className="font-bold">Try following someone!</span>
+                                            </Text>
+                                        </div>
+                                        <></>
+                                        <></>
+                                        <div className="max-w-md h-fit bg-card flex flex-col px-3 py-4 border rounded-default">
+                                            <Heading size="xs">Active Groups</Heading>
+                                            <Text size="sm">
+                                                blah, blah.
+                                            </Text>
+                                        </div>
 
-                                    {posts.map((post: any) => (
-                                        <FeedListItem key={post.id} post={post} />
-                                    ))}
-                                </Masonry>
-                            </ResponsiveMasonry>
-                        </InfiniteScroll>
-                    )}
+                                        {posts.map((post: any) => (
+                                            <FeedListItem key={post.id} post={post} />
+                                        ))}
+                                    </Masonry>
+                                </ResponsiveMasonry>
+                            </InfiniteScroll>
+                        )}
+                    </div>
 
                     {posts.length === 0 && (
                         <p className="text-sm text-neutral-500 text-center">
@@ -143,13 +164,15 @@ export default function FeedList({...props}: {
 }
 
 const views = [
-    { id: 1, name: 'List', icon: WireframeList, unavailable: false },
-    { id: 2, name: 'Grid', icon: WireframeGrid, unavailable: false },
+    { id: 1, name: 'Grid', icon: WireframeGrid, unavailable: false },
+    { id: 2, name: 'List', icon: WireframeList, unavailable: false },
 ]
 
 function FeedViewListbox() {
-    const [selectedView, setSelectedView] = useState(views[1])
     const [open, setOpen] = useState(false)
+
+    const FeedViewConfig = useUIStore(state => state.feedView);
+    const setFeedViewConfig = useUIStore(state => state.setFeedView);
 
     return (
         <div className="relative">
@@ -157,15 +180,15 @@ function FeedViewListbox() {
                 content={
                     <div className="flex gap-4 bg-card px-3 py-4">
                         {views.map((view) => (
-                            <div
-                                key={view.id}
+                            <div key={view.id}
+                                 className={`flex flex-col items-center gap-2 p-2 cursor-pointer`}
+                                 onClick={() => {
+                                     setFeedViewConfig(view.id);
+                                     setOpen(false);
+                                 }}
                             >
-                                <div
-                                    className={`flex flex-col items-center gap-2 p-2 cursor-pointer`}
-                                >
-                                    <view.icon className="w-24 border rounded-default" />
-                                    <span>{view.name}</span>
-                                </div>
+                                <view.icon className="w-24 border rounded-default" />
+                                <span>{view.name}</span>
                             </div>
                         ))}
                     </div>
