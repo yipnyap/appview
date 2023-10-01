@@ -24,13 +24,13 @@ $colors-dark: (
         'border-default': #2e2e2e,
 );
 
-body:not(.dark) {
+html:not(.dark) {
     @each $color, $value in $colors {
         --color-#{$color}: #{$value};
     }
 }
 
-body.dark {
+html.dark {
     @each $color, $value in $colors-dark {
         --color-#{$color}: #{$value};
     }
