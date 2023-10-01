@@ -35,6 +35,10 @@ module.exports = {
         "slide-down-fade": "slide-down-fade 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
       },
       keyframes: {
+        hue: {
+          "0%": { filter: "hue-rotate(0deg)" },
+          "100%": { filter: "hue-rotate(360deg)" },
+        },
         shimmer: {
           '100%': {
             transform: 'translateX(100%)',
