@@ -41,20 +41,29 @@ export default async function RootLayout({
             }
         }} />
 
-        <div vaul-drawer-wrapper="" id="BodyScroll" className="flex h-full bg-body">
-            <div className="hidden sm:flex flex-col fixed top-0 justify-center items-center gap-y-4 h-[100vh] w-16 border-r border-neutral-100 bg-sidebar">
+        {/* @todo: something should be done with the sidebar, vaul uses translate3d() which breaks fixed/sticky anchors */}
+        <div vaul-drawer-wrapper="" id="BodyScroll" className="flex bg-neutral-900 p-0 md:overflow-hidden pl-0 md:pl-24 md:pr-6">
+            <div className="fixed z-20 top-0 left-0 bottom-0 hidden flex-col items-center gap-14 px-4 py-12 w-24 md:flex">
                 <Link href="/">
                     <Logo className="w-8" />
                 </Link>
-                <Link href="/" className="no-style hover:text-neutral-500/75">
-                    <Home className="w-8" />
-                </Link>
+
+                <div className="flex flex-col flex-grow">
+                    <Link href="/" className="no-style text-white hover:text-white/75">
+                        <Home className="w-8" />
+                    </Link>
+                </div>
             </div>
 
-            <div className="flex-shrink-0 w-full h-[100vh] sm:pl-16">
-                <Preload>
-                    {children}
-                </Preload>
+            <div className="flex flex-shrink-0 py-0 md:py-6 min-h-screen w-full">
+                <div className="relative flex grow max-w-full bg-body rounded-none md:rounded-default">
+                    {/* The parent is already growing, however children need to be forced the same in a separate flexbox */}
+                    <div className="relative flex flex-col grow max-w-full">
+                        <Preload>
+                            {children}
+                        </Preload>
+                    </div>
+                </div>
             </div>
         </div>
         <Analytics />
