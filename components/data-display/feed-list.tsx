@@ -94,7 +94,6 @@ export default function FeedList({...props}: {
                             next={fetchPosts}
                             hasMore={postsHasMore}
                             loader={<LoadingCard />}
-                            scrollableTarget="BodyScroll"
                             endMessage={
                                 <p className="text-sm text-neutral-500 text-center">
                                     And just like that, you{'\''}ve reached the end of it all.<br/>
