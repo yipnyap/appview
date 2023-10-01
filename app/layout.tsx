@@ -42,7 +42,7 @@ export default async function RootLayout({
         }} />
 
         <div vaul-drawer-wrapper="" id="BodyScroll" className="flex h-full bg-body">
-            <div className="flex flex-col fixed top-0 justify-center items-center gap-y-4 h-[100vh] w-16 border-r border-neutral-100 bg-sidebar">
+            <div className="hidden sm:flex flex-col fixed top-0 justify-center items-center gap-y-4 h-[100vh] w-16 border-r border-neutral-100 bg-sidebar">
                 <Link href="/">
                     <Logo className="w-8" />
                 </Link>
@@ -51,7 +51,7 @@ export default async function RootLayout({
                 </Link>
             </div>
 
-            <div className="flex-shrink-0 w-full h-[100vh] pl-16">
+            <div className="flex-shrink-0 w-full h-[100vh] sm:pl-16">
                 <Preload>
                     {children}
                 </Preload>
