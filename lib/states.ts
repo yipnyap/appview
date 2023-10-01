@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import {persist} from 'zustand/middleware'
 
 interface UIStore {
     feedView: number;
@@ -6,7 +7,11 @@ interface UIStore {
 }
 
 // UI Settings Store
-export const useUIStore = create<UIStore>((set) => ({
-    feedView: 1,
-    setFeedView: (feedView: number) => set({ feedView }),
-}));
+export const useUIStore = create(persist<UIStore>(
+    (set) => ({
+        feedView: 1,
+        setFeedView: (feedView: number) => set({ feedView }),
+    }), {
+        name: 'ui-settings',
+    }
+));
