@@ -4,22 +4,21 @@ import UserAvatar from '@/components/shared/user/avatar'
 // @ts-ignore
 import * as HoverCard from '@radix-ui/react-hover-card';
 import {Drawer} from 'vaul';
-import Card from '@/components/shared/card'
-import {Heading} from '@/components/shared/text'
-import {LoadingSpinner} from '@/components/shared/icons'
-import Markdown from 'react-markdown'
 import {useState} from 'react'
 import clsx from 'clsx'
 import ProfileHeader from '@/components/shared/user/header'
 
-export default function UserInfoCol({ user, size }: {
+export default function UserInfoCol({ user, size, inDrawer }: {
     user: any; // object
     size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+    inDrawer?: boolean;
 }) {
     const [snap, setSnap] = useState<number | string | null>('148px');
 
+    const DrawerRoot = inDrawer ? Drawer.NestedRoot : Drawer.Root;
+
     return (
-        <Drawer.Root
+        <DrawerRoot
             snapPoints={['355px', '640px', 1]}
             activeSnapPoint={snap}
             setActiveSnapPoint={setSnap}
@@ -51,7 +50,7 @@ export default function UserInfoCol({ user, size }: {
                     </div>
                 </Drawer.Content>
             </Drawer.Portal>
-        </Drawer.Root>
+        </DrawerRoot>
     )
 }
 

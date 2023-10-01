@@ -64,13 +64,10 @@ export declare interface NGFeedPostType {
     post: NGFeedPostDataType;
     onDelete?: Function;
     noDrawer?: boolean;
+    inDrawer?: boolean;
 
     theme?: any;
     children?: React.ReactNode;
-}
-
-export const NGFeedPostTheming = {
-    main: [],
 }
 
 function classNames(...classes: any[]) {
@@ -80,7 +77,8 @@ function classNames(...classes: any[]) {
 export default function FeedPost({...props}: NGFeedPostType) {
     const [postContent, setPostContent] = useState(props.post);
     const [selectedMedia, setSelectedMedia] = useState<any | null>(null);
-    const [slideoverMediaOpen, setSlideoverMediaOpen] = useState(false);
+
+    const DrawerRoot = props.inDrawer ? Drawer.NestedRoot : Drawer.Root;
 
     useEffect(() => {
         if (postContent?.subcontent) {
@@ -115,12 +113,12 @@ export default function FeedPost({...props}: NGFeedPostType) {
                                 </Link>
                             </div>
                         )}
-                        <UserInfoCol user={postContent.user} />
+                        <UserInfoCol user={postContent.user} inDrawer />
                     </div>
 
                     {/* @todo: this doesn't scale. make it scale :) */}
                     {!props.noDrawer ? (
-                        <Drawer.Root shouldScaleBackground>
+                        <DrawerRoot shouldScaleBackground>
                             <Drawer.Trigger>
                                 {/* Post Objects (Images) */}
                                 {postContent?.objects && postContent.objects.length > 0 && (
@@ -142,7 +140,7 @@ export default function FeedPost({...props}: NGFeedPostType) {
                                     </div>
                                 </Drawer.Content>
                             </Drawer.Portal>
-                        </Drawer.Root>
+                        </DrawerRoot>
                     ) : (
                         <>
                             {postContent?.objects && postContent.objects.length > 0 && (
