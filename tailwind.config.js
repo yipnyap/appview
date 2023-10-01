@@ -1,5 +1,5 @@
-/** @type {import('tailwindcss').Config} */
 const plugin = require("tailwindcss/plugin");
+const {default: flattenColorPalette} = require('tailwindcss/lib/util/flattenColorPalette');
 
 module.exports = {
   darkMode: "class",
@@ -23,6 +23,10 @@ module.exports = {
         'banner': '3 / 1',
       },
       animation: {
+        // Hue rotate
+        hue: "hue 1s ease-out",
+        // Shimmer
+        shimmer: "shimmer 1s ease-out infinite",
         // Fade up and down
         "fade-up": "fade-up 0.5s",
         "fade-down": "fade-down 0.5s",
@@ -82,5 +86,16 @@ module.exports = {
       addVariant("radix-side-top", '&[data-side="top"]');
       addVariant("radix-side-bottom", '&[data-side="bottom"]');
     }),
+    function ({ matchUtilities, theme }) {
+      matchUtilities(
+          {
+            highlight: (value) => ({boxShadow: `inset 0 1px 0 0 ${value}`}),
+          },
+          {
+            values: flattenColorPalette(theme('backgroundColor')),
+            type: 'color',
+          },
+      )
+    },
   ],
 };
