@@ -43,7 +43,7 @@ export default async function RootLayout({
     );
 }
 
-export function Layout({children}: {children: React.ReactNode}) {
+function Layout({children}: {children: React.ReactNode}) {
     return (
         <Providers>
             <Toaster className="dark:hidden" position="top-center" />
