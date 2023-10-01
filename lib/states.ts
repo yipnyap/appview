@@ -7,6 +7,6 @@ interface UIStore {
 
 // UI Settings Store
 export const useUIStore = create<UIStore>((set) => ({
-    feedView: 2,
+    feedView: 1,
     setFeedView: (feedView: number) => set({ feedView }),
 }));
