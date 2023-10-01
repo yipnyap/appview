@@ -5,10 +5,6 @@ const nextConfig = {
   images: {
     domains: ['api.yipnyap.me', 'ecwxmakixjrsklydfmtl.supabase.co'],
   },
-  async redirects() {
-    return [
-    ];
-  }
 };
 
 module.exports = nextConfig;
