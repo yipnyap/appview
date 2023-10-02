@@ -1944,6 +1944,11 @@ fd-slicer@~1.1.0:
   dependencies:
     pend "~1.2.0"
 
+fflate@^0.4.1:
+  version "0.4.8"
+  resolved "https://registry.yarnpkg.com/fflate/-/fflate-0.4.8.tgz#f90b82aefbd8ac174213abb338bd7ef848f0f5ae"
+  integrity sha512-FJqqoDBR00Mdj9ppamLa/Y7vxm+PRmNWA67N846RvsoYVMKB4q3y/de5PA7gUmRMYK/8CMz2GDZQmCRN1wBcWA==
+
 fflate@^0.7.3:
   version "0.7.4"
   resolved "https://registry.yarnpkg.com/fflate/-/fflate-0.7.4.tgz#61587e5d958fdabb5a9368a302c25363f4f69f50"
@@ -3516,6 +3521,13 @@ postcss@^8.4.21, postcss@^8.4.23:
     nanoid "^3.3.6"
     picocolors "^1.0.0"
     source-map-js "^1.0.2"
+
+posthog-js@^1.81.2:
+  version "1.81.2"
+  resolved "https://registry.yarnpkg.com/posthog-js/-/posthog-js-1.81.2.tgz#0065b213c2d1ba1f9c167dc881e16656f5c70c07"
+  integrity sha512-3QLdn7koy7n+nj23HAr/KbVYwOmQcCn0K/5zlaWazef8t4s5L8JgJSMkw96pDRuAYfYcUCr9yWLQDpDakPiIHQ==
+  dependencies:
+    fflate "^0.4.1"
 
 preact-render-to-string@^5.1.19:
   version "5.2.6"

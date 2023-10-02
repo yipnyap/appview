@@ -1,6 +1,6 @@
 'use client';
 
-import {Fragment, useEffect, useState} from 'react'
+import {useEffect, useState} from 'react'
 import Image from 'next/image';
 import InfiniteScroll from "react-infinite-scroll-component";
 import Blocks from "editorjs-blocks-react-renderer";
@@ -170,9 +170,7 @@ const views = [
 
 function FeedViewListbox() {
     const [open, setOpen] = useState(false)
-
-    const FeedViewConfig = useUIStore(state => state.feedView);
-    const setFeedViewConfig = useUIStore(state => state.setFeedView);
+    const setUIOptions = useUIStore(state => state.setOptions);
 
     return (
         <div className="relative">
@@ -183,7 +181,7 @@ function FeedViewListbox() {
                             <div key={view.id}
                                  className={`flex flex-col items-center gap-2 p-2 cursor-pointer`}
                                  onClick={() => {
-                                     setFeedViewConfig(view.id);
+                                     setUIOptions({ feedView: view.id });
                                      setOpen(false);
                                  }}
                             >
