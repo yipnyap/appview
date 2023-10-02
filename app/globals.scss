@@ -75,6 +75,23 @@ a:not(.no-style) {
     }
 }
 
+.animate-pulse-stagger > * {
+    & > *:not(.dont-animate) {
+        $n: 50;
+        animation: slide-up-fade-out 1s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+
+        @for $x from 1 through $n {
+            &:nth-child(#{$x}) {
+                animation-delay: 150ms * ($x) !important;
+            }
+        }
+    }
+}
+
+.infinite-scroll-component {
+    overflow: hidden !important;
+}
+
 [vaul-drawer-wrapper] {
     transition-property: opacity, transform, border-radius !important;
     transition-duration: 0.5s !important;
@@ -89,4 +106,19 @@ a:not(.no-style) {
 
 .drawer {
     @apply fixed flex flex-col bg-card border border-b-0 rounded-t-[10px] bottom-0 left-0 right-0 h-fit max-h-[97%] mx-[-1px] md:mx-auto md:max-w-sm lg:max-w-md xl:max-w-lg;
+}
+
+@keyframes slide-up-fade-out {
+    0% {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+    50% {
+        opacity: 0.5;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
 }

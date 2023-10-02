@@ -1,6 +1,6 @@
 'use client';
 
-import {useEffect, useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import Image from 'next/image';
 import InfiniteScroll from "react-infinite-scroll-component";
 import Blocks from "editorjs-blocks-react-renderer";
@@ -72,24 +72,38 @@ export default function FeedList({...props}: {
 
     const LoadingCard = () => {
         return (
-            <GridBody className="justify-center items-center h-full">
-                <Card>
-                    <Image src="/dog-on-ship.gif"
-                           alt="Animated pixel dog in box panting before falling over, then looping."
-                           height={128}
-                           width={168}
-                           style={{
-                               imageRendering: 'pixelated',
-                               display: 'inline-block',
-                               marginTop: '-1px',
-                               marginRight: '4px',
-                           }}
-                    />
-                    <Text size="sm">
-                        Loading posts for @<span className="font-bold">{feedID}</span>
-                    </Text>
-                </Card>
-            </GridBody>
+            // @ts-ignore
+            <ResponsiveMasonry
+                columnsCountBreakPoints={masonryColumns}>
+                {/* @ts-ignore */}
+                <Masonry className="list-stagger animate-pulse-stagger" gutter="24px">
+                    <Card className="dont-animate">
+                        <Image src="/dog-on-ship.gif"
+                               alt="Animated pixel dog in box panting before falling over, then looping."
+                               height={128}
+                               width={168}
+                               style={{
+                                   imageRendering: 'pixelated',
+                                   display: 'inline-block',
+                                   marginTop: '-1px',
+                                   marginRight: '4px',
+                               }}
+                        />
+                        <Text size="sm">
+                            Loading posts for @<span className="font-bold">{feedID}</span>
+                        </Text>
+                    </Card>
+
+                    {/* Bunch of empty cards of different random heights */}
+                    {Array.from(Array(50).keys()).map((i) => (
+                        <Card key={i} style={{
+                            height: `${Math.floor(Math.random() * 100) + 150}px`,
+                        }}>
+                            <></>
+                        </Card>
+                    ))}
+                </Masonry>
+            </ResponsiveMasonry>
         )
     }
 
