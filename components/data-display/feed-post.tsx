@@ -128,7 +128,11 @@ export default function FeedPost({...props}: NGFeedPostType) {
                                 <div
                                     className="min-h-fit w-full pb-3 px-4 cursor-pointer">
                                     <div
-                                        className="text-sm text-start text-body space-y-4">
+                                        className="text-sm text-start text-body space-y-4"
+                                        style={{
+                                            overflowWrap: 'anywhere'
+                                        }}
+                                    >
                                         {props.children}
                                     </div>
                                 </div>
@@ -150,7 +154,7 @@ export default function FeedPost({...props}: NGFeedPostType) {
                             <div
                                 className="min-h-fit w-full pb-3 px-4 cursor-pointer">
                                 <div
-                                    className="text-sm text-start text-body space-y-4">
+                                    className="break-normal	text-sm text-start text-body space-y-4">
                                     {props.children}
                                 </div>
                             </div>
