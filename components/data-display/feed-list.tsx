@@ -131,7 +131,7 @@ export default function FeedList({...props}: {
     }
 
     return (
-        <div className="p-12 h-full">
+        <div>
             {!postsReady && <LoadingCard />}
 
             {postsReady && (
