@@ -107,6 +107,29 @@ export default function FeedList({...props}: {
         )
     }
 
+    const LoadingCardSmall = () => {
+        return (
+            <GridBody>
+                <Card className="dont-animate">
+                    <Image src="/dog-on-ship.gif"
+                           alt="Animated pixel dog in box panting before falling over, then looping."
+                           height={128}
+                           width={168}
+                           style={{
+                               imageRendering: 'pixelated',
+                               display: 'inline-block',
+                               marginTop: '-1px',
+                               marginRight: '4px',
+                           }}
+                    />
+                    <Text size="sm">
+                        Loading posts for @<span className="font-bold">{feedID}</span>
+                    </Text>
+                </Card>
+            </GridBody>
+        )
+    }
+
     return (
         <div className="p-12 h-full">
             {!postsReady && <LoadingCard />}
@@ -127,7 +150,7 @@ export default function FeedList({...props}: {
                                 dataLength={posts.length}
                                 next={fetchPosts}
                                 hasMore={postsHasMore}
-                                loader={<LoadingCard />}
+                                loader={<LoadingCardSmall />}
                                 endMessage={
                                     <p className="text-sm text-neutral-500 text-center">
                                         And just like that, you{'\''}ve reached the end of it all.<br/>
