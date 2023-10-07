@@ -409,7 +409,7 @@ function MediaGrid({...props}: any) {
 
             {objects.map((object: { url: string; id: string; }, objectIndex: number) => {
                 // Check E2 for object variant
-                switch (object.id.split(':')[1].substring(2, 4)) {
+                switch (object.id?.split(':')[1].substring(2, 4)) {
                     case 'C1':
                         return (
                             <>
