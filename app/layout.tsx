@@ -5,11 +5,12 @@ import { lexend, inter } from "./fonts"
 import {Logo} from '@/components/shared/icons/logo'
 import Link from 'next/link'
 import Preload from '@/components/onboard/preload'
-import {Newspaper} from 'lucide-react'
+import {Newspaper, PartyPopper} from 'lucide-react'
 import {Toaster} from 'sonner'
 import colors from 'tailwindcss/colors'
 import {Providers} from '@/app/providers'
 import SidebarItem from '@/components/layout/sidebar/item'
+import Banner from '@/components/layout/banner'
 
 export const metadata = {
   title: "Yipnyap",
@@ -69,7 +70,20 @@ function Layout({children}: {children: React.ReactNode}) {
                     </div>
                 </div>
 
-                <div className="flex flex-shrink-0 py-0 md:py-6 min-h-screen w-full">
+                <div className="flex flex-col flex-shrink-0 min-h-screen w-full md:py-6 md:pt-0">
+                    <Banner branded
+                            icon={PartyPopper}
+                            title="This is a banner. Woahhh!"
+                            description="Banners related to you show up here. Public notices will show with the feral branding - like this one!"
+                    />
+
+                    <div className="flex md:hidden">
+                        <Banner branded
+                                title="Feral doesn't support mobile views."
+                                description="If you're on a mobile device, please use a desktop browser. Don't worry, we'll be adding mobile support soon!"
+                        />
+                    </div>
+
                     <div className="relative flex grow max-w-full bg-body rounded-none md:rounded-default">
                         {/* The parent is already growing, however children need to be forced the same in a separate flexbox */}
                         <div className="relative flex flex-col grow max-w-full">
