@@ -1,6 +1,6 @@
 'use client'
 import {useEffect, useState} from 'react'
-import {Cog6ToothIcon, EyeSlashIcon} from '@heroicons/react/24/solid'
+import {Cog6ToothIcon, ExclamationTriangleIcon, EyeSlashIcon} from '@heroicons/react/24/solid'
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 import Button from '@/components/shared/button'
 import {useUserAccountStore} from '@/lib/states'
@@ -90,6 +90,14 @@ function UserDropdown() {
                 <div className="flex-col inline-flex items-center">
                     <div className="self-stretch text-lg font-semibold">{user.name || user.username}</div>
                     <div className="self-stretch text-alt text-xs font-medium leading-tight">@{user.username}</div>
+                </div>
+            </div>
+
+            {/* notice banner */}
+            <div className="inline-flex justify-start items-center gap-4 w-full px-4 py-2 border border-accent-1/25 bg-card-alt bg-opacity-50 rounded-xl">
+                <ExclamationTriangleIcon className="w-6 h-6 text-accent-1" />
+                <div className="px-4 py-3 text-alt text-opacity-75 text-sm">
+                    Feral is still WIP. This is not a real account.
                 </div>
             </div>
 
