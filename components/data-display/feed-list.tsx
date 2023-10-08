@@ -206,7 +206,6 @@ const views = [
 ]
 
 function FeedViewListbox() {
-    const [open, setOpen] = useState(false)
     const setUIOptions = useUIStore(state => state.setOptions);
 
     return (
@@ -219,7 +218,6 @@ function FeedViewListbox() {
                                  className={`flex flex-col items-center gap-2 p-2 cursor-pointer`}
                                  onClick={() => {
                                      setUIOptions({ feedView: view.id });
-                                     setOpen(false);
                                  }}
                             >
                                 <view.icon className="w-24 border rounded-default" />
@@ -229,8 +227,6 @@ function FeedViewListbox() {
                     </div>
                 }
                 align="end"
-                openPopover={open}
-                setOpenPopover={setOpen}
             >
                 <LayoutDashboard className="w-8 h-8 cursor-pointer" />
             </Popover>
