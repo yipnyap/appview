@@ -11,6 +11,7 @@ import colors from 'tailwindcss/colors'
 import {Providers} from '@/app/providers'
 import SidebarItem from '@/components/layout/sidebar/item'
 import Banner from '@/components/layout/banner'
+import Navbar from '@/components/layout/navbar'
 
 export const metadata = {
   title: "Yipnyap",
@@ -73,20 +74,24 @@ function Layout({children}: {children: React.ReactNode}) {
                 </div>
 
                 <div className="flex flex-col flex-shrink-0 min-h-screen w-full md:py-6 md:pt-0">
-                    <Banner branded
-                            icon={PartyPopper}
-                            title="This is a banner. Woahhh!"
-                            description="Banners related to you show up here. Public notices will show with the feral branding - like this one!"
-                    />
+                    <Navbar />
 
-                    <div className="flex md:hidden">
+                    <div className="hidden">
                         <Banner branded
-                                title="Feral doesn't support mobile views."
-                                description="If you're on a mobile device, please use a desktop browser. Don't worry, we'll be adding mobile support soon!"
+                                icon={PartyPopper}
+                                title="This is a banner. Woahhh!"
+                                description="Banners related to you show up here. Public notices will show with the feral branding - like this one!"
                         />
+
+                        <div className="flex md:hidden">
+                            <Banner branded
+                                    title="Feral doesn't support mobile views."
+                                    description="If you're on a mobile device, please use a desktop browser. Don't worry, we'll be adding mobile support soon!"
+                            />
+                        </div>
                     </div>
 
-                    <div className="relative flex grow max-w-full bg-body rounded-none md:rounded-default">
+                    <div className="relative flex flex-col grow max-w-full bg-body rounded-none md:rounded-default">
                         {/* The parent is already growing, however children need to be forced the same in a separate flexbox */}
                         <div className="relative flex flex-col grow max-w-full">
                             <Preload>
