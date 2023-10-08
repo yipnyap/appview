@@ -94,7 +94,7 @@ function UserDropdown() {
             </div>
 
             {/* notice banner */}
-            <div className="inline-flex justify-start items-center gap-4 w-full px-4 py-2 border border-accent-1/25 bg-card-alt bg-opacity-50 rounded-xl">
+            <div className="inline-flex justify-start items-center gap-4 w-full px-4 py-2 border border-accent-1/25 bg-n-3 dark:bg-n-7 bg-opacity-50 rounded-xl">
                 <ExclamationTriangleIcon className="w-6 h-6 text-accent-1" />
                 <div className="px-4 py-3 text-alt text-opacity-75 text-sm">
                     Feral is still WIP. This is not a real account.
@@ -102,12 +102,12 @@ function UserDropdown() {
             </div>
 
             <div className="w-full bg-n-3 dark:bg-n-7 bg-opacity-95 rounded-xl flex-col inline-flex">
-                <div className="px-4 py-3 bg-card-alt bg-opacity-50 rounded-tl-xl rounded-tr-xl justify-between items-start inline-flex">
+                <div className="px-4 py-3 bg-n-2/50 dark:bg-n-6/50 bg-opacity-50 rounded-tl-xl rounded-tr-xl justify-between items-start inline-flex">
                     <div className="justify-center items-center gap-4 flex">
                         <div className="w-6 h-6 p-1 justify-center items-center">
                             <div className="w-full h-full bg-green-400 rounded-full" />
                         </div>
-                        <div className="text-alt text-opacity-75 text-sm">Online</div>
+                        <div className="text-body text-sm">Online</div>
                     </div>
                     <div className="w-6 h-6 relative" />
                 </div>
