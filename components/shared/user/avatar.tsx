@@ -13,9 +13,9 @@ export default function UserAvatar({ user, size = 'md' }: {
         '2xl': 'h-24 w-24',
     }
     return (
-        <Avatar.Root className={`inline-flex ${sizes[size]} justify-center items-center rounded-full overflow-hidden`}>
+        <Avatar.Root className={`inline-flex ${sizes[size]} justify-center items-center bg-n-5 text-white rounded-full overflow-hidden`}>
             <Avatar.Image src={user.avatar} alt={user.username || user.name} className="w-full h-full" />
-            <Avatar.Fallback className="bg-neutral-100/50 text-neutral-500/50">
+            <Avatar.Fallback>
                 {(user.username || user.name).slice(0, 2).toUpperCase()}
             </Avatar.Fallback>
         </Avatar.Root>
