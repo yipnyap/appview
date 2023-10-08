@@ -9,6 +9,24 @@ module.exports = {
   },
   theme: {
     extend: {
+      colors: {
+        primary: {
+          1: 'rgba(0, 132, 255, 1)',
+        },
+        accent: {
+          1: 'rgba(216, 76, 16, 1)',
+        },
+        n: {
+          1: 'rgba(250, 250, 250, 1)',
+          2: 'rgba(245, 245, 245, 1)',
+          3: 'rgba(229, 229, 229, 1)',
+          4: 'rgba(108, 114, 117, 1)',
+          5: 'rgba(74, 74, 74, 1)',
+          6: 'rgba(42, 42, 42, 1)',
+          7: 'rgba(30, 30, 30, 1)',
+          8: 'rgba(20, 20, 20, 1)',
+        }
+      },
       padding: {
         lg: "8rem",
       },
@@ -86,6 +104,7 @@ module.exports = {
   plugins: [
     require("@tailwindcss/forms"),
     require("@tailwindcss/typography"),
+    require("tailwindcss-inner-border"),
     plugin(({ addVariant }) => {
       addVariant("radix-side-top", '&[data-side="top"]');
       addVariant("radix-side-bottom", '&[data-side="bottom"]');
