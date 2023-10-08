@@ -5,20 +5,26 @@
 $colors: (
         'bg-body': #fafafa,
         'bg-card': #FFF,
+        'bg-card-alt': #f5f5f5,
         'bg-sidebar': #FFF,
 
         'text-body': #525252,
+        'text-alt': theme('colors.n.5'),
+        'fill-alt': theme('colors.n.5'),
         'text-primary': #1e6af6,
 
         'border-default': #e5e5e5,
 );
 
 $colors-dark: (
-        'bg-body': #1e1e1e,
-        'bg-card': #2a2a2a,
-        'bg-sidebar': #2a2a2a,
+        'bg-body': theme('colors.n.7'),
+        'bg-card': theme('colors.n.6'),
+        'bg-card-alt': theme('colors.n.5'),
+        'bg-sidebar': theme('colors.n.6'),
 
         'text-body': #FFF,
+        'text-alt': theme('colors.n.4'),
+        'fill-alt': theme('colors.n.4'),
         'text-primary': #1e6af6,
 
         'border-default': #2e2e2e,
@@ -57,6 +63,8 @@ a:not(.no-style) {
             color: var(--color-#{$color});
         } @elseif str-slice($color, 0, 6) == 'border' {
             border-color: var(--color-#{$color});
+        } @elseif str-slice($color, 0, 4) == 'fill' {
+            fill: var(--color-#{$color});
         }
     }
 }
