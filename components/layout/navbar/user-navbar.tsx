@@ -120,8 +120,14 @@ function UserDropdown() {
             <div className="w-full justify-start items-center gap-4 inline-flex">
                 <div className="w-16 h-16 relative">
                     <UserAvatar user={user} size="xl" />
-                    <div className="w-3 h-3 p-0.5 left-[45px] top-[45px] absolute justify-center items-center gap-2 inline-flex">
-                        <div className={`w-2.5 h-2.5 p-2 ${currentStatus.className} rounded-full border-4 border-n-1 dark:border-n-6`} />
+                    <div className="w-6 h-6 p-1 left-10 top-10 rounded-full absolute justify-center items-center inline-flex bg-n-1 dark:bg-n-6">
+                        {currentStatus.icon && (
+                            <currentStatus.icon className={`w-full h-full ${currentStatus.className}`} />
+                        )}
+
+                        {!currentStatus.icon && (
+                            <div className={`w-3.5 h-3.5 ${currentStatus.className} rounded-full`} />
+                        )}
                     </div>
                 </div>
                 <div className="flex-col inline-flex items-center">
@@ -131,14 +137,14 @@ function UserDropdown() {
             </div>
 
             {/* notice banner */}
-            <div className="inline-flex justify-start items-center gap-4 w-full px-4 py-2 border border-accent-1/25 bg-n-3 dark:bg-n-7 bg-opacity-50 rounded-xl">
+            <div className="inline-flex justify-start items-center gap-4 w-full px-4 py-2 border border-accent-1/25 bg-n-2 dark:bg-n-7 bg-opacity-50 rounded-xl">
                 <ExclamationTriangleIcon className="w-6 h-6 text-accent-1" />
                 <div className="px-4 py-3 text-alt text-opacity-75 text-sm">
                     Feral is still WIP. This is not a real account.
                 </div>
             </div>
 
-            <div className="inline-flex flex-col w-full bg-n-3 dark:bg-n-7 bg-opacity-95 rounded-xl">
+            <div className="inline-flex flex-col w-full bg-n-2 dark:bg-n-7 bg-opacity-95 border rounded-xl">
                 <Accordion.Root
                     className="w-full"
                     type="single"
@@ -149,7 +155,9 @@ function UserDropdown() {
                             <Accordion.Trigger className="AccordionTrigger w-full px-4 py-3 bg-n-2/50 dark:bg-n-6/50 bg-opacity-50 rounded-tl-xl rounded-tr-xl justify-between items-start inline-flex">
                                 <div className="justify-center items-center gap-4 flex">
                                     {currentStatus.icon && (
-                                        <currentStatus.icon className={`${currentStatus.className || 'fill-alt'} w-6 h-6 transition-colors`} />
+                                        <div className="w-6 h-6 p-0.5 justify-center items-center">
+                                            <currentStatus.icon className={`${currentStatus.className || 'fill-alt'} w-full h-full transition-colors`} />
+                                        </div>
                                     )}
 
                                     {!currentStatus.icon && (
@@ -176,7 +184,9 @@ function UserDropdown() {
                                     }}
                                 >
                                     {option.icon && (
-                                        <option.icon className={`${option.className || 'fill-alt'} w-6 h-6 transition-colors`} />
+                                        <div className="w-6 h-6 p-0.5 justify-center items-center">
+                                            <option.icon className={`${option.className || 'fill-alt'} w-full h-full transition-colors`} />
+                                        </div>
                                     )}
 
                                     {!option.icon && (
