@@ -7,7 +7,10 @@ export async function POST(req: NextRequest) {
     try {
         const { data, headers: returnedHeaders } = await axios.post(
             `${process.env.NEXT_PUBLIC_YIPNYAP_CORE_URL}/v2/id/login`,
-            body
+            body,
+            {
+                httpsAgent: new (require('https').Agent)({ family: 4 }),
+            }
         )
 
         if (!data || data.success !== true) return NextResponse.json(data, { status: 401})
@@ -26,6 +29,7 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({
             error: error.message,
             data: error.response?.data,
+            url: error.config?.url,
         }, { status })
     }
 }
