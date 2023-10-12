@@ -11,21 +11,25 @@ module.exports = {
     extend: {
       colors: {
         primary: {
-          1: 'rgba(0, 132, 255, 1)',
+          1: 'rgb(var(--color-primary-1) / <alpha-value>)',
         },
         accent: {
-          1: 'rgba(216, 76, 16, 1)',
-          5: 'rgba(221, 167, 63, 1)',
+          1: 'rgb(var(--color-accent-1) / <alpha-value>)',
+          5: 'rgb(var(--color-accent-5) / <alpha-value>)',
         },
         n: {
-          1: 'rgba(250, 250, 250, 1)',
-          2: 'rgba(245, 245, 245, 1)',
-          3: 'rgba(229, 229, 229, 1)',
-          4: 'rgba(108, 114, 117, 1)',
-          5: 'rgba(74, 74, 74, 1)',
-          6: 'rgba(42, 42, 42, 1)',
-          7: 'rgba(30, 30, 30, 1)',
-          8: 'rgba(20, 20, 20, 1)',
+          1: 'rgb(var(--color-n-1) / <alpha-value>)',
+          2: 'rgb(var(--color-n-2) / <alpha-value>)',
+          3: 'rgb(var(--color-n-3) / <alpha-value>)',
+          4: 'rgb(var(--color-n-4) / <alpha-value>)',
+          5: 'rgb(var(--color-n-5) / <alpha-value>)',
+          6: 'rgb(var(--color-n-6) / <alpha-value>)',
+          7: 'rgb(var(--color-n-7) / <alpha-value>)',
+          8: 'rgb(var(--color-n-8) / <alpha-value>)',
+        },
+        body: {
+          DEFAULT: 'rgb(var(--color-n-1) / <alpha-value>)',
+          dark: 'rgb(var(--color-n-8) / <alpha-value>)',
         }
       },
       padding: {
@@ -109,6 +113,9 @@ module.exports = {
     plugin(({ addVariant }) => {
       addVariant("radix-side-top", '&[data-side="top"]');
       addVariant("radix-side-bottom", '&[data-side="bottom"]');
+    }),
+    plugin(function ({ addVariant }) {
+      addVariant('low-fidelity', 'html.low-fidelity &')
     }),
     function ({ matchUtilities, theme }) {
       matchUtilities(

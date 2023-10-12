@@ -30,6 +30,7 @@ export default function UserNavbar() {
             id: '1',
             username: 'rek',
             status: 1,
+            banner: '/dummy/rek/banner.jpg'
         })
     }
 
@@ -116,7 +117,7 @@ function UserDropdown() {
     const currentStatus = StatusOptions.find((option) => option.id === user.status) || StatusOptions[0]
 
     return (
-        <div className="flex flex-col w-96 self-center p-4 gap-3 bg-n-1 dark:bg-n-6 will-change-[opacity,transform] animate-slide-up-fade">
+        <div className="flex flex-col w-96 self-center p-4 gap-3 bg-n-1/90 dark:bg-n-6/90 low-fidelity:bg-n-1 low-fidelity:dark:bg-n-6">
             <div className="w-full justify-start items-center gap-4 inline-flex">
                 <div className="w-16 h-16 relative">
                     <UserAvatar user={user} size="xl" />

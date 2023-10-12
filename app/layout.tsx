@@ -58,7 +58,7 @@ function Layout({children}: {children: React.ReactNode}) {
             }} />
 
             {/* @todo: something should be done with the sidebar, vaul uses translate3d() which breaks fixed/sticky anchors */}
-            <div vaul-drawer-wrapper="" id="BodyScroll" className="flex bg-neutral-900 p-0 text-sm md:overflow-hidden pl-0 md:pl-24 md:pr-6">
+            <div vaul-drawer-wrapper="" id="BodyScroll" className="flex p-0 bg-n-8/95 text-sm md:overflow-hidden pl-0 md:pl-24 md:pr-6">
                 <div className="fixed -left-36 -top-36 w-96 h-96 opacity-10 mix-blend-screen bg-fuchsia-400 rounded-full blur-3xl" />
 
                 <div className="fixed z-20 top-0 left-0 bottom-0 hidden flex-col items-center gap-14 px-4 py-12 w-24 md:flex">
@@ -91,7 +91,7 @@ function Layout({children}: {children: React.ReactNode}) {
                         </div>
                     </div>
 
-                    <div className="relative flex flex-col grow max-w-full bg-body rounded-none md:rounded-default">
+                    <div className="relative flex flex-col grow max-w-full bg-body-acrylic texture-mica rounded-none low-fidelity:bg-body low-fidelity:dark:bg-body-dark md:rounded-default">
                         {/* The parent is already growing, however children need to be forced the same in a separate flexbox */}
                         <div className="relative flex flex-col grow max-w-full">
                             <Preload>
