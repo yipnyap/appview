@@ -3,11 +3,10 @@
  * URL: /proxy/[url]
  * Using NextJS API Routes
  */
-import { NextApiRequest, NextApiResponse } from 'next';
-import {ImageResponse, NextResponse} from 'next/server'
+import {NextRequest, NextResponse} from 'next/server'
 
 export async function GET(
-  req: NextApiRequest,
+  req: NextRequest,
   context: {
     params: {
       url: string[]

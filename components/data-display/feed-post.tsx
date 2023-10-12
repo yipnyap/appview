@@ -222,7 +222,7 @@ function CommentBox({...props}: any) {
                     type="text"
                     name="comment"
                     id="comment"
-                    className="block w-full bg-body rounded-lg border placeholder:text-neutral-400 sm:text-sm focus:ring-primary"
+                    className="block w-full bg-body rounded-lg border placeholder:text-neutral-400 sm:text-sm dark:bg-body-dark focus:ring-primary"
                     placeholder="Comment"
                     ref={commentRef}
                 />
