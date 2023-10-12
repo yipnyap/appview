@@ -1,7 +1,7 @@
 import './globals.scss'
 import { Analytics } from '@vercel/analytics/react'
 import cx from 'classnames'
-import { lexend, inter } from "./fonts"
+import { inter } from "./fonts"
 import {Logo} from '@/components/shared/icons/logo'
 import Link from 'next/link'
 import Preload from '@/components/onboard/preload'
@@ -35,7 +35,7 @@ export default async function RootLayout({
 }) {
     return (
         <html lang="en" suppressHydrationWarning>
-        <body className={`${cx(lexend.variable, inter.variable)} font-default font-normal text-body`}>
+        <body className={`${cx(inter.variable)} font-default font-normal text-body`}>
         <Layout>
             {children}
         </Layout>
