@@ -91,7 +91,7 @@ export default function FeedPost({...props}: NGFeedPostType) {
 
     return (
         <>
-            <div className={`text-start h-fit bg-card flex flex-col border rounded-default`}>
+            <div className={`text-start h-fit bg-card unicorn:bg-surface-variant/50 flex flex-col border rounded-default`}>
                 <div className="relative">
                     <div className="px-4 py-5">
                         {/* "___ Rehowled" */}
@@ -128,7 +128,7 @@ export default function FeedPost({...props}: NGFeedPostType) {
                                 <div
                                     className="min-h-fit w-full pb-3 px-4 cursor-pointer">
                                     <div
-                                        className="text-sm text-start text-body space-y-4"
+                                        className="text-sm text-start text-default unicorn:text-on-surface-variant space-y-4"
                                         style={{
                                             overflowWrap: 'anywhere'
                                         }}

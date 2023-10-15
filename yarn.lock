@@ -2902,6 +2902,13 @@ lucide-react@0.105.0-alpha.4:
   resolved "https://registry.yarnpkg.com/lucide-react/-/lucide-react-0.105.0-alpha.4.tgz#9f9fa5a22973a071d63d65504866489d8050eaa7"
   integrity sha512-QclWOzKYj7sDW33jTQK4enmxL1LmI2SHFqEEP56EWhvs4mmlbbFe6ALYcdcdGysNISNovEbH5WBHg8tN5DLn0w==
 
+material-dynamic-colors@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/material-dynamic-colors/-/material-dynamic-colors-1.0.5.tgz#1f70cc35a427b9d57060d8f79ca6656fde8c2c02"
+  integrity sha512-JSzT7R1Yr4beN7tzPuXMsvVXWnsyXFDBWgRFWk6+112H46B3j3Nj1C2bYjEwC/ezAu+hoVL7Gd+R4dt+ozIQqQ==
+  dependencies:
+    "@material/material-color-utilities" "^0.2.7"
+
 mdast-util-from-markdown@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/mdast-util-from-markdown/-/mdast-util-from-markdown-2.0.0.tgz#52f14815ec291ed061f2922fd14d6689c810cb88"

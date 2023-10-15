@@ -195,7 +195,7 @@ function UserDropdown() {
                                             <div className={`w-full h-full ${option.className || 'bg-n-5'} rounded-full`} />
                                         </div>
                                     )}
-                                    <div className="text-alt text-opacity-75 text-sm transition-colors group-hover:text-primary-1">{option.name}</div>
+                                    <div className="text-alt text-opacity-75 text-sm transition-colors group-hover:text-primary-feral">{option.name}</div>
                                 </div>
                             ))}
                         </Accordion.Content>
@@ -205,8 +205,8 @@ function UserDropdown() {
                 <div className="inline-flex flex-col w-full">
                     {UserOptions.map((option, i) => (
                         <div key={i} className="group px-4 py-3 justify-start items-center gap-4 inline-flex cursor-pointer" onClick={option.onClick || (() => {})}>
-                            <option.icon className={`${option.className || 'group-hover:fill-primary-1'} w-6 h-6 fill-alt transition-colors`} />
-                            <div className={`${option.className || 'group-hover:text-primary-1'} text-alt text-opacity-75 text-sm transition-colors`}>{option.name}</div>
+                            <option.icon className={`${option.className || 'group-hover:fill-primary-feral'} w-6 h-6 fill-alt transition-colors`} />
+                            <div className={`${option.className || 'group-hover:text-primary-feral'} text-alt text-opacity-75 text-sm transition-colors`}>{option.name}</div>
                         </div>
                     ))}
                 </div>

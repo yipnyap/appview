@@ -163,21 +163,21 @@ export default function FeedList({...props}: {
                                     columnsCountBreakPoints={masonryColumns}>
                                     {/* @ts-ignore */}
                                     <Masonry className="list-stagger" gutter="24px">
-                                        <div className="max-w-md h-fit bg-card flex flex-col px-3 py-4 border rounded-default">
+                                        <Card>
                                             <Heading>Welcome to Yipnyap!</Heading>
                                             <Text size="sm">
                                                 This is your feed. It{'\''}s a collection of posts from people you follow.<br/>
                                                 <span className="font-bold">Try following someone!</span>
                                             </Text>
-                                        </div>
+                                        </Card>
                                         <></>
                                         <></>
-                                        <div className="max-w-md h-fit bg-card flex flex-col px-3 py-4 border rounded-default">
+                                        <Card>
                                             <Heading size="xs">Active Groups</Heading>
                                             <Text size="sm">
                                                 blah, blah.
                                             </Text>
-                                        </div>
+                                        </Card>
 
                                         {posts.map((post: any) => (
                                             <FeedListItem key={post.id} post={post} />
@@ -244,48 +244,46 @@ function FeedListItem({ post }: {
             // onDelete={() => posts = posts.filter((p: any) => p.id !== post.id)}
         >
             {typeof post?.content === 'object' ? (
-                <article className="prose dark:prose-invert">
-                    <Blocks data={post.content} config={{
-                        code: {
-                            className: "language-js block whitespace-pre overflow-x-scroll bg-box-alt"
-                        },
-                        delimiter: {
-                            className: "border border-2 w-16 mx-auto"
-                        },
-                        embed: {
-                            className: "border-0"
-                        },
-                        header: {
-                            // className: "font-bold"
-                        },
-                        marker: {
-                            className: "bg-yellow-200"
-                        },
-                        image: {
-                            className: "w-full max-w-screen-md",
-                            actionsClassNames: {
-                                stretched: "w-full h-80 object-cover",
-                                withBorder: "border border-2",
-                                withBackground: "p-2",
-                            }
-                        },
-                        list: {
-                            className: "list-inside"
-                        },
-                        paragraph: {
-                            className: "text-sm mb-2",
-                            actionsClassNames: {
-                                alignment: "text-{alignment}", // This is a substitution placeholder: left or center.
-                            }
-                        },
-                        quote: {
-                            className: "py-3 px-5 italic font-serif"
-                        },
-                        table: {
-                            className: "table-auto"
+                <Blocks data={post.content} config={{
+                    code: {
+                        className: "language-js block whitespace-pre overflow-x-scroll bg-box-alt"
+                    },
+                    delimiter: {
+                        className: "border border-2 w-16 mx-auto"
+                    },
+                    embed: {
+                        className: "border-0"
+                    },
+                    header: {
+                        // className: "font-bold"
+                    },
+                    marker: {
+                        className: "bg-yellow-200"
+                    },
+                    image: {
+                        className: "w-full max-w-screen-md",
+                        actionsClassNames: {
+                            stretched: "w-full h-80 object-cover",
+                            withBorder: "border border-2",
+                            withBackground: "p-2",
                         }
-                    }}/>
-                </article>
+                    },
+                    list: {
+                        className: "list-inside"
+                    },
+                    paragraph: {
+                        className: "text-sm mb-2",
+                        actionsClassNames: {
+                            alignment: "text-{alignment}", // This is a substitution placeholder: left or center.
+                        }
+                    },
+                    quote: {
+                        className: "py-3 px-5 italic font-serif"
+                    },
+                    table: {
+                        className: "table-auto"
+                    }
+                }}/>
             ) : post.content}
         </FeedPost>
     )

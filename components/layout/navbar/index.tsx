@@ -7,11 +7,11 @@ import {Suspense} from 'react'
 export default function Navbar() {
     return (
         <div className="flex items-center">
-            <Banner branded
-                    icon={PartyPopper}
-                    title="This is a banner. Woahhh!"
-                    description="Banners related to you show up here. Public notices will show with the feral branding - like this one!"
-            />
+            {/*<Banner branded*/}
+            {/*        icon={PartyPopper}*/}
+            {/*        title="This is a banner. Woahhh!"*/}
+            {/*        description="Banners related to you show up here. Public notices will show with the feral branding - like this one!"*/}
+            {/*/>*/}
 
             <div className="flex-grow" />
 

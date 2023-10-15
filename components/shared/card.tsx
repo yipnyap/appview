@@ -4,7 +4,7 @@ export default function Card({ children, className, ...props }: {
     [key: string]: any;
 }) {
     return (
-        <div className={`${className} max-w-md h-fit bg-card flex flex-col px-3 py-4 gap-2 border rounded-default`} {...props}>
+        <div className={`${className} max-w-md h-fit bg-card flex flex-col px-3 py-4 border rounded-default`} {...props}>
             {children}
         </div>
     )

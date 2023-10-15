@@ -63,7 +63,7 @@ export function UserInfo({ user, size }: {
             <UserAvatar user={user} size={size} />
             <div className="flex flex-col gap-1">
                 <span className="text-sm font-semibold">{user.username || user.avatar}</span>
-                <span className="self-baseline text-xs text-neutral-500/50">{user.tag || 'piss'}</span>
+                <span className="self-baseline text-xs text-alt unicorn:text-on-surface-variant/50">{user.tag || 'piss'}</span>
             </div>
         </div>
     )

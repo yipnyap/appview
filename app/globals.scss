@@ -13,14 +13,12 @@
 $colors: (
         //'bg-body': theme('colors.n.1'),
         //'bg-body-acrylic': theme('colors.n.1/50'),
-        'bg-card': #FFF,
         'bg-card-alt': #f5f5f5,
         'bg-sidebar': #FFF,
 
         'text-body': #525252,
         'text-alt': theme('colors.n.5'),
         'fill-alt': theme('colors.n.5'),
-        'text-primary': #1e6af6,
 
         'border-default': #e5e5e5,
 );
@@ -28,14 +26,12 @@ $colors: (
 $colors-dark: (
         //'bg-body': theme('colors.n.7'),
         //'bg-body-acrylic': theme('colors.n.7/50'),
-        'bg-card': theme('colors.n.6'),
         'bg-card-alt': theme('colors.n.5'),
         'bg-sidebar': theme('colors.n.6'),
 
         'text-body': #FFF,
         'text-alt': theme('colors.n.4'),
         'fill-alt': theme('colors.n.4'),
-        'text-primary': #1e6af6,
 
         'border-default': #2e2e2e,
 );
@@ -61,7 +57,7 @@ html.dark {
     ::before,
     ::after {
         font-family: 'Lexend Variable', sans-serif;
-        @apply border-[var(--color-border-default)];
+        @apply border-[rgb(var(--md-sys-outline)/.25)];
     }
 
     :root {
@@ -144,7 +140,7 @@ a:not(.no-style) {
 }
 
 .drawer {
-    @apply fixed flex flex-col bg-card border border-b-0 rounded-t-[10px] bottom-0 left-0 right-0 h-fit max-h-[97%] mx-[-1px] md:mx-auto md:max-w-sm lg:max-w-md xl:max-w-lg;
+    @apply fixed flex flex-col bg-surface border border-b-0 rounded-t-[10px] bottom-0 left-0 right-0 h-fit max-h-[97%] mx-[-1px] md:mx-auto md:max-w-sm lg:max-w-md xl:max-w-lg;
 }
 
 .AccordionChevron {

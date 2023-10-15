@@ -27,7 +27,7 @@ export function Text({ children, size = 'sm', ...props }: {
     [key: string]: any;
 }): JSX.Element {
     return (
-        <p className={`${textSize[size]} text-body`} {...props}>
+        <p className={`${textSize[size]}`} {...props}>
             {children}
         </p>
     )
