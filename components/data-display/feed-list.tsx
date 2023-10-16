@@ -164,6 +164,7 @@ export default function FeedList({...props}: {
                                     {/* @ts-ignore */}
                                     <Masonry className="list-stagger" gutter="24px">
                                         <Card>
+                                            <Image src="/img/balcony-conversation.png" alt="dummy" height={100} width={182} className="self-center"/>
                                             <Heading>Welcome to Yipnyap!</Heading>
                                             <Text size="sm">
                                                 This is your feed. It{'\''}s a collection of posts from people you follow.<br/>

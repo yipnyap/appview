@@ -27,7 +27,7 @@ export default async function Home() {
                   <div className="flex flex-col justify-center items-center">
                       <Image src="/img/welcome.png" alt="Welcome to Yipnyap!" width={256} height={256} quality={100} />
                       <Heading className="text-center">
-                            Find {`'`}yo friends.
+                            Stay above the chaos
                       </Heading>
                       <Text size="sm" className="text-center text-alt unicorn:text-on-surface-variant">
                           Your friends and following activity appear here, as well as chat messages.
