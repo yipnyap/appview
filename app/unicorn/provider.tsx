@@ -11,7 +11,6 @@ export default function UnicornEngine({ children }: {
     const {theme} = useTheme()
 
     useEffect(() => {
-        // todo: move this into a provider
         if (user) {
             if (!user.theme) {
                 // @ts-ignore

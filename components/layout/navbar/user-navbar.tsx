@@ -37,29 +37,26 @@ export default function UserNavbar() {
     return (
         <>
             {domLoaded && (
-                <div className="inline-flex justify-between gap-8 px-10 py-4">
-                    {/* end */}
-                    <div className="justify-end">
-                        {!user && (
-                            <Button onClick={handleLogin}>
-                                Login
-                            </Button>
-                        )}
+                <>
+                    {!user && (
+                        <Button onClick={handleLogin}>
+                            Login
+                        </Button>
+                    )}
 
-                        {user && (
-                            <Popover
-                                content={<>
-                                    {user && <UserDropdown />}
-                                </>}
-                                align="end"
-                            >
-                                <div>
-                                    <UserAvatar user={user} size="lg" />
-                                </div>
-                            </Popover>
-                        )}
-                    </div>
-                </div>
+                    {user && (
+                        <Popover
+                            content={<>
+                                {user && <UserDropdown />}
+                            </>}
+                            align="end"
+                        >
+                            <div>
+                                <UserAvatar user={user} size="lg" />
+                            </div>
+                        </Popover>
+                    )}
+                </>
             )}
         </>
     )

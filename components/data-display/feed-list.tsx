@@ -28,7 +28,7 @@ export default function FeedList({...props}: {
     const [posts, setPosts] = useState<any>([]);
     const [masonryColumns, setMasonryColumns] = useState<{
         [key: number]: number;
-    }>({350: 1, 750: 2, 900: 3, 1200: 4});
+    }>({350: 1, 750: 2, 900: 3});
 
     const FeedViewConfig = useUIStore(state => state.feedView);
 
@@ -52,7 +52,7 @@ export default function FeedList({...props}: {
         switch (FeedViewConfig) {
             default:
             case 1:
-                setMasonryColumns({350: 1, 750: 2, 900: 3, 1200: 4});
+                setMasonryColumns({350: 1, 750: 2, 900: 3});
                 break;
             case 2:
                 setMasonryColumns({350: 1});
