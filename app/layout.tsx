@@ -56,7 +56,7 @@ function Layout({children}: {children: React.ReactNode}) {
             }} />
 
             {/* @todo: something should be done with the sidebar, vaul uses translate3d() which breaks fixed/sticky anchors */}
-            <div vaul-drawer-wrapper="" id="BodyScroll" className="flex p-0 bg-n-8 text-sm md:overflow-hidden pl-0 md:pl-24 md:pr-6">
+            <div vaul-drawer-wrapper="" id="BodyScroll" className="flex p-0 bg-n-8 unicorn:bg-surface-dim text-sm md:overflow-hidden pl-0 md:pl-24 md:pr-6">
                 <div className="fixed z-20 top-0 left-0 bottom-0 hidden flex-col items-center gap-14 px-4 py-12 w-24 md:flex">
                     <Link href="/" className="animate-hue">
                         <Logo className="w-8" />
