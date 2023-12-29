@@ -20,7 +20,7 @@ import { NovelContext } from "./provider";
 export default function Editor({
   completionApi = "/api/kukiko/generate",
   className = "relative w-full",
-  defaultValue = defaultEditorContent,
+  defaultValue = '',
   extensions = [],
   editorProps = {},
   onUpdate = () => {},
