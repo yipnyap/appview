@@ -1,6 +1,9 @@
 import Moveable from "react-moveable";
+import {Editor} from '@tiptap/core'
 
-export const ImageResizer = ({ editor }) => {
+export const ImageResizer = ({ editor }: {
+  editor: Editor
+}) => {
   const updateMediaSize = () => {
     const imageInfo = document.querySelector(
       ".ProseMirror-selectednode"
@@ -9,6 +12,7 @@ export const ImageResizer = ({ editor }) => {
       const selection = editor.state.selection;
       editor.commands.setImage({
         src: imageInfo.src,
+        // @ts-ignore - width and height are, for some fucking reason, not typed.
         width: Number(imageInfo.style.width.replace("px", "")),
         height: Number(imageInfo.style.height.replace("px", "")),
       });

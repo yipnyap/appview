@@ -22,34 +22,45 @@ export interface BubbleMenuItem {
 type EditorBubbleMenuProps = Omit<BubbleMenuProps, "children">;
 
 export const EditorBubbleMenu: FC<EditorBubbleMenuProps> = (props) => {
+  if (!props.editor) throw new Error("EditorBubbleMenu: no editor provided");
   const items: BubbleMenuItem[] = [
     {
       name: "bold",
+      // @ts-ignore
       isActive: () => props.editor.isActive("bold"),
+      // @ts-ignore
       command: () => props.editor.chain().focus().toggleBold().run(),
       icon: BoldIcon,
     },
     {
       name: "italic",
+      // @ts-ignore
       isActive: () => props.editor.isActive("italic"),
+      // @ts-ignore
       command: () => props.editor.chain().focus().toggleItalic().run(),
       icon: ItalicIcon,
     },
     {
       name: "underline",
+      // @ts-ignore
       isActive: () => props.editor.isActive("underline"),
+      // @ts-ignore
       command: () => props.editor.chain().focus().toggleUnderline().run(),
       icon: UnderlineIcon,
     },
     {
       name: "strike",
+      // @ts-ignore
       isActive: () => props.editor.isActive("strike"),
+      // @ts-ignore
       command: () => props.editor.chain().focus().toggleStrike().run(),
       icon: StrikethroughIcon,
     },
     {
       name: "code",
+      // @ts-ignore
       isActive: () => props.editor.isActive("code"),
+      // @ts-ignore
       command: () => props.editor.chain().focus().toggleCode().run(),
       icon: CodeIcon,
     },
@@ -65,10 +76,8 @@ export const EditorBubbleMenu: FC<EditorBubbleMenuProps> = (props) => {
       // - the selected node is an image
       // - the selection is empty
       // - the selection is a node selection (for drag handles)
-      if (editor.isActive("image") || empty || isNodeSelection(selection)) {
-        return false;
-      }
-      return true;
+      return !(editor.isActive("image") || empty || isNodeSelection(selection));
+
     },
     tippyOptions: {
       moveTransition: "transform 0.15s ease-out",
