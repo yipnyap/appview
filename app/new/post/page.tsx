@@ -11,8 +11,7 @@ export default function NewPost() {
 
     return (
         <div className="flex flex-col mx-auto w-full max-w-3xl">
-            editorIsOpen: {editorIsOpen ? 'true - editor is mounted! - ' : 'false - '}
-            {Editor.aiIsAllowed ? 'AI is available' : 'AI is unavailable'} <br/>
+            editorIsOpen: {editorIsOpen ? 'true - editor is mounted! - ' : 'false - '} AI is unavailable <br/>
             user: {user ? 'true' : 'false'} <br/>
             universeConnected: {user?.universeConnected ? 'true' : 'false'}
 
