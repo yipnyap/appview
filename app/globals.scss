@@ -57,7 +57,7 @@ html.dark {
     ::before,
     ::after {
         font-family: 'Lexend Variable', sans-serif;
-        @apply border-[rgb(var(--md-sys-outline)/.25)];
+        @apply border-default unicorn:border-[rgb(var(--md-sys-outline)/.25)];
     }
 
     :root {

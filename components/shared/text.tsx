@@ -13,7 +13,7 @@ export function Heading({ children, size = 'base', ...props }: {
     size?: 'xs' | 'sm' | 'base' | 'lg' | 'xl' | '2xl' | '3xl';
     [key: string]: any;
 }): JSX.Element {
-    props.className = `${props.className || ''} ${textSize[size]} text-neutral-900 dark:text-white`
+    props.className = `${props.className || ''} ${textSize[size]}`
     return (
         <h3 {...props}>
             {children}
@@ -21,9 +21,9 @@ export function Heading({ children, size = 'base', ...props }: {
     )
 }
 
-export function Text({ children, size = 'sm', ...props }: {
+export function Text({ children, size = 'base', ...props }: {
     children: React.ReactNode;
-    size: 'xs' | 'sm' | 'base' | 'lg' | 'xl' | '2xl' | '3xl';
+    size?: 'xs' | 'sm' | 'base' | 'lg' | 'xl' | '2xl' | '3xl';
     [key: string]: any;
 }): JSX.Element {
     return (

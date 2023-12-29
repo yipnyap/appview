@@ -13,6 +13,9 @@ import LogoutIcon from '@/components/shared/icons/logout'
 import {toast} from '@/lib/toast'
 import Popover from '@/components/shared/popover'
 import {ChevronDownIcon} from '@heroicons/react/20/solid'
+import Link from 'next/link'
+import Image from 'next/image'
+import ResourceSwitcher from '@/components/data-display/resource-switcher'
 
 export default function UserNavbar() {
     const {user, setUser} = useUserAccountStore()
@@ -28,9 +31,11 @@ export default function UserNavbar() {
         // dummy
         setUser({
             id: '1',
-            username: 'rek',
+            username: 'rek.yipnyap.me',
+            nickname: 'Rekkisomo Harley',
             status: 1,
-            banner: '/dummy/rek/banner.jpg'
+            banner: '/dummy/rek/banner.jpg',
+            avatar: 'https://cdn.discordapp.com/avatars/96876194712018944/cc2e74005ac5b978e62da06200049385.webp?size=4096'
         })
     }
 
@@ -52,7 +57,7 @@ export default function UserNavbar() {
                             align="end"
                         >
                             <div>
-                                <UserAvatar user={user} size="lg" />
+                                <UserAvatar user={user} className="inline-flex items-center justify-center h-8 w-8 bg-n-1 dark:bg-n-7 cursor-pointer rounded overflow-hidden hover:opacity-70 hover:inner-border hover:inner-border-[#e5e5e5] hover:dark:inner-border-[#2e2e2e] hover:unicorn:inner-border-outline/25" />
                             </div>
                         </Popover>
                     )}
@@ -114,35 +119,18 @@ function UserDropdown() {
     const currentStatus = StatusOptions.find((option) => option.id === user.status) || StatusOptions[0]
 
     return (
-        <div className="flex flex-col w-96 self-center p-4 gap-3 bg-n-1/90 dark:bg-n-6/90 low-fidelity:bg-n-1 low-fidelity:dark:bg-n-6">
-            <div className="w-full justify-start items-center gap-4 inline-flex">
-                <div className="w-16 h-16 relative">
-                    <UserAvatar user={user} size="xl" />
-                    <div className="w-6 h-6 p-1 left-10 top-10 rounded-full absolute justify-center items-center inline-flex bg-n-1 dark:bg-n-6">
-                        {currentStatus.icon && (
-                            <currentStatus.icon className={`w-full h-full ${currentStatus.className}`} />
-                        )}
-
-                        {!currentStatus.icon && (
-                            <div className={`w-3.5 h-3.5 ${currentStatus.className} rounded-full`} />
-                        )}
-                    </div>
-                </div>
-                <div className="flex-col inline-flex items-center">
-                    <div className="self-stretch text-lg font-semibold">{user.name || user.username}</div>
-                    <div className="self-stretch text-alt text-xs font-medium leading-tight">@{user.username}</div>
-                </div>
+        <div className="flex flex-col w-80 self-center gap-2 bg-n-1 border rounded dark:bg-n-7">
+            <div className="w-full justify-start items-center p-4 gap-4 inline-flex">
+                <span className="flex items-center justify-between space-x-3">
+                    <UserAvatar user={user} className="inline-flex items-center justify-center h-10 w-10 bg-n-1 cursor-pointer rounded overflow-hidden dark:bg-n-7" />
+                    <span className="flex-1 flex flex-col min-w-0">
+                        <span className="text-sm font-medium truncate">{user.nickname || '⚠️ Please login again!'}</span>
+                        <span className="text-alt text-sm truncate">{user.username}</span>
+                    </span>
+                </span>
             </div>
 
-            {/* notice banner */}
-            <div className="inline-flex justify-start items-center gap-4 w-full px-4 py-2 border border-accent-1/25 bg-n-2 dark:bg-n-7 bg-opacity-50 rounded-xl">
-                <ExclamationTriangleIcon className="w-6 h-6 text-accent-1" />
-                <div className="px-4 py-3 text-alt text-opacity-75 text-sm">
-                    Feral is still WIP. This is not a real account.
-                </div>
-            </div>
-
-            <div className="inline-flex flex-col w-full bg-n-2 dark:bg-n-7 bg-opacity-95 border rounded-xl">
+            <div className="inline-flex flex-col w-full">
                 <Accordion.Root
                     className="w-full"
                     type="single"
@@ -150,16 +138,17 @@ function UserDropdown() {
                 >
                     <Accordion.Item value="status">
                         <Accordion.Header asChild>
-                            <Accordion.Trigger className="AccordionTrigger w-full px-4 py-3 bg-n-2/50 dark:bg-n-6/50 bg-opacity-50 rounded-tl-xl rounded-tr-xl justify-between items-start inline-flex">
-                                <div className="justify-center items-center gap-4 flex">
-                                    {currentStatus.icon && (
-                                        <div className="w-6 h-6 p-0.5 justify-center items-center">
+                            <Accordion.Trigger
+                                className="AccordionTrigger inline-flex justify-between items-start w-full px-4 py-2">
+                                <div className="justify-center items-center gap-2 flex">
+                                {currentStatus.icon && (
+                                        <div className="w-5 h-5 p-0.5 justify-center items-center">
                                             <currentStatus.icon className={`${currentStatus.className || 'fill-alt'} w-full h-full transition-colors`} />
                                         </div>
                                     )}
 
                                     {!currentStatus.icon && (
-                                        <div className="w-6 h-6 p-1 justify-center items-center">
+                                        <div className="w-5 h-5 p-1 justify-center items-center">
                                             <div className={`w-full h-full ${currentStatus.className || 'bg-n-5'} rounded-full`} />
                                         </div>
                                     )}
@@ -173,7 +162,7 @@ function UserDropdown() {
                             {StatusOptions.filter((option) => option.id !== user.status).map((option, i) => (
                                 <div
                                     key={i}
-                                    className="group px-4 py-3 justify-start items-center gap-4 inline-flex cursor-pointer"
+                                    className="group px-4 py-2 justify-start items-center gap-2 inline-flex cursor-pointer"
                                     onClick={() => {
                                         setUser({
                                             ...user,
@@ -182,13 +171,13 @@ function UserDropdown() {
                                     }}
                                 >
                                     {option.icon && (
-                                        <div className="w-6 h-6 p-0.5 justify-center items-center">
+                                        <div className="w-5 h-5 p-0.5 justify-center items-center">
                                             <option.icon className={`${option.className || 'fill-alt'} w-full h-full transition-colors`} />
                                         </div>
                                     )}
 
                                     {!option.icon && (
-                                        <div className="w-6 h-6 p-1 justify-center items-center">
+                                        <div className="w-5 h-5 p-1 justify-center items-center">
                                             <div className={`w-full h-full ${option.className || 'bg-n-5'} rounded-full`} />
                                         </div>
                                     )}
@@ -201,8 +190,8 @@ function UserDropdown() {
 
                 <div className="inline-flex flex-col w-full">
                     {UserOptions.map((option, i) => (
-                        <div key={i} className="group px-4 py-3 justify-start items-center gap-4 inline-flex cursor-pointer" onClick={option.onClick || (() => {})}>
-                            <option.icon className={`${option.className || 'group-hover:fill-primary-feral'} w-6 h-6 fill-alt transition-colors`} />
+                        <div key={i} className="group px-4 py-2 justify-start items-center gap-2 inline-flex cursor-pointer" onClick={option.onClick || (() => {})}>
+                            <option.icon className={`${option.className || 'group-hover:fill-primary-feral'} w-5 h-5 fill-alt transition-colors`} />
                             <div className={`${option.className || 'group-hover:text-primary-feral'} text-alt text-opacity-75 text-sm transition-colors`}>{option.name}</div>
                         </div>
                     ))}

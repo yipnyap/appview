@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ['api.yipnyap.me', 'ecwxmakixjrsklydfmtl.supabase.co'],
+    domains: ['api.yipnyap.me', 'ecwxmakixjrsklydfmtl.supabase.co', 'cdn.discordapp.com'],
   },
 };
 

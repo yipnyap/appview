@@ -5,11 +5,14 @@ import { inter } from "./fonts"
 import {Logo} from '@/components/shared/icons/logo'
 import Link from 'next/link'
 import Preload from '@/components/onboard/preload'
-import {Newspaper} from 'lucide-react'
+import {AlertOctagon, Newspaper} from 'lucide-react'
 import {Toaster} from 'sonner'
 import colors from 'tailwindcss/colors'
 import {Providers} from '@/app/providers'
 import SidebarItem from '@/components/layout/sidebar/item'
+import Sidebar from '@/components/layout/sidebar'
+import ContextBar from '@/components/layout/context-bar'
+import Banner from '@/components/layout/banner'
 
 export const metadata = {
   title: "Yipnyap",
@@ -56,26 +59,27 @@ function Layout({children}: {children: React.ReactNode}) {
             }} />
 
             {/* @todo: something should be done with the sidebar, vaul uses translate3d() which breaks fixed/sticky anchors */}
-            <div vaul-drawer-wrapper="" id="BodyScroll" className="flex p-0 bg-n-8 unicorn:bg-surface-dim text-sm md:overflow-hidden pl-0 md:pl-24 md:pr-6">
-                <div className="fixed z-20 top-0 left-0 bottom-0 hidden flex-col items-center gap-14 px-4 py-12 w-24 md:flex">
-                    <Link href="/" className="animate-hue">
-                        <Logo className="w-8" />
-                    </Link>
-
-                    <div className="flex flex-col flex-grow">
-                        <SidebarItem href="/">
-                            <Newspaper className="w-6" />
-                        </SidebarItem>
-                    </div>
-                </div>
-
-                <div className="flex flex-col flex-shrink-0 min-h-screen w-full md:py-6 md:px-0">
-                    <div className="flex flex-row grow max-w-full bg-n-1 dark:bg-n-7 unicorn:bg-surface-container rounded-none md:rounded-default">
+            <div vaul-drawer-wrapper="" id="BodyScroll" className="flex p-0 bg-n-8 text-sm unicorn:bg-surface-container-low md:overflow-hidden">
+                <div className="flex flex-col flex-shrink-0 min-h-screen w-full">
+                    <div className="flex flex-row grow max-w-full unicorn:bg-surface-container rounded-none md:rounded-default">
                         {/* The parent is already growing, however children need to be forced the same in a separate flexbox */}
                         <div className="flex flex-col grow max-w-full">
-                            <Preload>
-                                {children}
-                            </Preload>
+                            <div className="flex flex-row flex-grow divide-x">
+                                {/* Sidebar */}
+                                <Sidebar />
+
+                                {/* Main content */}
+                                <div className="flex flex-col flex-grow px-4 pb-0 h-screen overflow-y-auto">
+                                    <div className="mb-4 overflow-hidden">
+                                        <Banner branded title="Feral is WIP" description="This version should only be used by those developing Yipnyap, or for those curious. Don't report bugs, we most likely know already." icon={AlertOctagon} />
+                                    </div>
+                                    <Preload>
+                                        {children}
+                                    </Preload>
+                                </div>
+
+                                <ContextBar />
+                            </div>
                         </div>
                     </div>
                 </div>

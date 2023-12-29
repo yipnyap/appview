@@ -70,43 +70,6 @@ export default function FeedList({...props}: {
         })
     }
 
-    const LoadingCard = () => {
-        return (
-            // @ts-ignore
-            <ResponsiveMasonry
-                columnsCountBreakPoints={masonryColumns}>
-                {/* @ts-ignore */}
-                <Masonry className="list-stagger animate-pulse-stagger" gutter="24px">
-                    <Card className="dont-animate">
-                        <Image src="/dog-on-ship.gif"
-                               alt="Animated pixel dog in box panting before falling over, then looping."
-                               height={128}
-                               width={168}
-                               style={{
-                                   imageRendering: 'pixelated',
-                                   display: 'inline-block',
-                                   marginTop: '-1px',
-                                   marginRight: '4px',
-                               }}
-                        />
-                        <Text size="sm">
-                            Loading posts for @<span className="font-bold">{feedID}</span>
-                        </Text>
-                    </Card>
-
-                    {/* Bunch of empty cards of different random heights */}
-                    {Array.from(Array(50).keys()).map((i) => (
-                        <Card key={i} style={{
-                            height: `${Math.floor(Math.random() * 100) + 150}px`,
-                        }}>
-                            <></>
-                        </Card>
-                    ))}
-                </Masonry>
-            </ResponsiveMasonry>
-        )
-    }
-
     const LoadingCardSmall = () => {
         return (
             <GridBody>
@@ -132,7 +95,11 @@ export default function FeedList({...props}: {
 
     return (
         <div>
-            {!postsReady && <LoadingCard />}
+            {!postsReady && <LoadingCard title={
+                <>
+                    Loading posts for @<span className="font-bold">{feedID}</span>
+                </>
+            } />}
 
             {postsReady && (
                 <>
@@ -172,7 +139,6 @@ export default function FeedList({...props}: {
                                             </Text>
                                         </Card>
                                         <></>
-                                        <></>
                                         <Card>
                                             <Heading size="xs">Active Groups</Heading>
                                             <Text size="sm">
@@ -201,6 +167,48 @@ export default function FeedList({...props}: {
     )
 }
 
+export function LoadingCard({ title, masonryColumns }: {
+    title: string | JSX.Element;
+    masonryColumns?: {
+        [key: number]: number;
+    }
+}) {
+    return (
+        // @ts-ignore
+        <ResponsiveMasonry
+            columnsCountBreakPoints={masonryColumns}>
+            {/* @ts-ignore */}
+            <Masonry className="list-stagger animate-pulse-stagger" gutter="24px">
+                <Card className="dont-animate">
+                    <Image src="/dog-on-ship.gif"
+                           alt="Animated pixel dog in box panting before falling over, then looping."
+                           height={128}
+                           width={168}
+                           style={{
+                               imageRendering: 'pixelated',
+                               display: 'inline-block',
+                               marginTop: '-1px',
+                               marginRight: '4px',
+                           }}
+                    />
+                    <Text size="sm">
+                        {title}
+                    </Text>
+                </Card>
+
+                {/* Bunch of empty cards of different random heights */}
+                {Array.from(Array(50).keys()).map((i) => (
+                    <Card key={i} style={{
+                        height: `${Math.floor(Math.random() * 100) + 150}px`,
+                    }}>
+                        <></>
+                    </Card>
+                ))}
+            </Masonry>
+        </ResponsiveMasonry>
+    )
+}
+
 const views = [
     { id: 1, name: 'Grid', icon: WireframeGrid, unavailable: false },
     { id: 2, name: 'List', icon: WireframeList, unavailable: false },
@@ -213,7 +221,7 @@ function FeedViewListbox() {
         <div className="relative">
             <Popover
                 content={
-                    <div className="flex gap-4 bg-card px-3 py-4">
+                    <div className="flex gap-4 bg-card rounded px-3 py-4">
                         {views.map((view) => (
                             <div key={view.id}
                                  className={`flex flex-col items-center gap-2 p-2 cursor-pointer`}

@@ -1,8 +1,9 @@
 import * as Avatar from '@radix-ui/react-avatar'
 
-export default function UserAvatar({ user, size = 'md' }: {
+export default function UserAvatar({ user, size = 'md', ...props }: {
     user: any; // object - @todo: type this
     size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+    [x: string]: any;
 }) {
     const sizes = {
         xs: 'h-4 w-4',
@@ -13,7 +14,7 @@ export default function UserAvatar({ user, size = 'md' }: {
         '2xl': 'h-24 w-24',
     }
     return (
-        <Avatar.Root className={`inline-flex ${sizes[size]} justify-center items-center bg-n-5 text-white rounded-full overflow-hidden`}>
+        <Avatar.Root className={`inline-flex ${sizes[size]} justify-center items-center bg-n-5 text-white rounded-full overflow-hidden`} {...props}>
             <Avatar.Image src={user.avatar} alt={user.username || user.name} className="w-full h-full" />
             <Avatar.Fallback>
                 {(user.username || user.name).slice(0, 2).toUpperCase()}

@@ -91,7 +91,7 @@ export default function FeedPost({...props}: NGFeedPostType) {
 
     return (
         <>
-            <div className={`text-start h-fit bg-card unicorn:bg-surface-variant/50 flex flex-col border rounded-default`}>
+            <div className={`text-start h-fit bg-card unicorn:bg-surface-variant/95 flex flex-col border rounded-default`}>
                 <div className="relative">
                     <div className="px-4 py-5">
                         {/* "___ Rehowled" */}
