@@ -69,16 +69,20 @@ function Layout({children}: {children: React.ReactNode}) {
                                 <Sidebar />
 
                                 {/* Main content */}
-                                <div className="flex flex-col flex-grow px-4 pb-0 h-screen overflow-y-auto">
-                                    <div className="mb-4">
-                                        <Banner branded title="Feral is WIP" description="This version should only be used by those developing Yipnyap, or for those curious. Don't report bugs, we most likely know already." icon={AlertOctagon} />
+                                <div className="flex flex-row h-screen w-screen divide-x">
+                                    <div className="flex flex-col flex-grow h-full pb-0 px-4 overflow-y-auto">
+                                        <div className="hidden mb-4 lg:block">
+                                            <Banner branded title="Feral is WIP"
+                                                    description="This version should only be used by those developing Yipnyap, or for those curious. Don't report bugs, we most likely know already."
+                                                    icon={AlertOctagon}/>
+                                        </div>
+                                        <Preload>
+                                            {children}
+                                        </Preload>
                                     </div>
-                                    <Preload>
-                                        {children}
-                                    </Preload>
-                                </div>
 
-                                <ContextBar />
+                                    <ContextBar/>
+                                </div>
                             </div>
                         </div>
                     </div>
