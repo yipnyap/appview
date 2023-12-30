@@ -1,6 +1,6 @@
 'use client'
 
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import {ChevronDownIcon} from '@heroicons/react/20/solid'
 import {Logo} from '@/components/shared/icons/logo'
 import {Text} from '@/components/shared/text'
@@ -8,13 +8,19 @@ import UserAvatar from '@/components/shared/user/avatar'
 import useComponentVisible from '@/lib/hooks/use-component-visible'
 
 export default function ResourceSwitcher() {
+    const initialSound = new Audio('/sounds/switcher.ogg')
+    const switchedSound = new Audio('/sounds/switched.ogg')
+    const cancelSound = new Audio('/sounds/switchcancel.ogg')
+
     const resourceDefault = {
         did: '_universe.yipnyap.me',
         name: `Pre-Alpha ${process.env.NEXT_PUBLIC_COMMIT_HASH}`,
         standalone: true,
     }
 
-    const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible();
+    const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible({
+        soundOnClose: cancelSound,
+    });
     const [currentResource, setCurrentResource] = useState<{
         did: string;
         name: string;
@@ -49,9 +55,30 @@ export default function ResourceSwitcher() {
         },
     ]
 
+    const playSound = (sound: HTMLAudioElement) => {
+        // if already playing, reset
+        if (sound.currentTime > 0) {
+            sound.currentTime = 0
+        }
+        sound.play()
+    }
+
+    useEffect(() => {
+        // shimmer on change using ref
+        if (ref.current) {
+            ref.current.classList.add('before:animate-shimmer-fast')
+            setTimeout(() => {
+                ref.current.classList.remove('before:animate-shimmer-fast')
+            }, 500)
+        }
+    }, [currentResource])
+
     return (
-        <div ref={ref} className="flex flex-row items-center justify-between">
-            <span className="flex z-10 w-full justify-between items-center cursor-pointer" onClick={() => setIsComponentVisible(!isComponentVisible)}>
+        <div ref={ref} className="flex flex-row items-center justify-between shimmer-template">
+            <span className="flex z-10 w-full justify-between items-center cursor-pointer" onClick={() => {
+                playSound(isComponentVisible ? cancelSound : initialSound)
+                setIsComponentVisible(!isComponentVisible)
+            }}>
                 {!currentResource || currentResource.standalone ? (
                     <div className="flex h-10 items-center space-x-2">
                         <Logo className="w-8 h-8"/>
@@ -67,7 +94,7 @@ export default function ResourceSwitcher() {
             <div>
                 {isComponentVisible && (
                     <div
-                        className="absolute animate-fade-in top-0 left-0 bg-n-6 border w-full rounded rounded-tr-none rounded-tl-none shadow-lg pt-[64px]">
+                        className="absolute animate-fade-in top-0 left-0 bg-white border-b w-full rounded rounded-tr-none rounded-tl-none shadow-sm pt-[64px] dark:bg-n-7">
                         <div className="relative max-h-80 overflow-y-auto">
                             <div className="flex flex-col">
                                 {/* loop excluding current */}
@@ -76,6 +103,7 @@ export default function ResourceSwitcher() {
                                     return (
                                         <div key={resource.did} className="flex flex-col"
                                              onClick={() => {
+                                                 playSound(switchedSound)
                                                  setCurrentResource(resource)
                                                  setIsComponentVisible(false)
                                              }}>

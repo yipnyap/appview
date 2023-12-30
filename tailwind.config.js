@@ -120,6 +120,7 @@ module.exports = {
         hue: "hue 1s ease-out",
         // Shimmer
         shimmer: "shimmer 1s ease-out infinite",
+        "shimmer-fast": "shimmer 0.5s infinite",
         // Fade up and down
         "fade-up": "fade-up 0.5s",
         "fade-down": "fade-down 0.5s",
