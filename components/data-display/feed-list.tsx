@@ -9,12 +9,13 @@ import {fetcher} from '@/lib/utils'
 import FeedPost from './feed-post';
 import {Heading, Text} from '@/components/shared/text'
 import GridBody from '@/components/layout/grid-body'
-import {LayoutDashboard} from 'lucide-react'
+import {LayoutDashboard, MegaphoneIcon} from 'lucide-react'
 import WireframeGrid from '@/components/shared/icons/wireframe-grid'
 import WireframeList from '@/components/shared/icons/wireframe-list'
 import Card from '@/components/shared/card'
 import Popover from '@/components/shared/popover'
 import {useUIStore} from '@/lib/states'
+import UserAvatar from '@/components/shared/user/avatar'
 
 export default function FeedList({...props}: {
     feedID: string;
@@ -131,19 +132,22 @@ export default function FeedList({...props}: {
                                     {/* @ts-ignore */}
                                     <Masonry className="list-stagger" gutter="24px">
                                         <Card>
-                                            <Image src="/img/balcony-conversation.png" alt="dummy" height={100} width={182} className="self-center"/>
-                                            <Heading>Welcome to Yipnyap!</Heading>
+                                            <Heading size="xs" className="flex items-center mb-1">
+                                                <MegaphoneIcon className="w-5 h-5 inline-block mr-2" />
+                                                <span>PACK ANNOUNCEMENT</span>
+                                            </Heading>
                                             <Text size="sm">
-                                                This is your feed. It{'\''}s a collection of posts from people you follow.<br/>
-                                                <span className="font-bold">Try following someone!</span>
+                                                This is some announcement from a pack or from staff, these should rarely
+                                                be used. Advertising through announcements is not allowed.
                                             </Text>
-                                        </Card>
-                                        <></>
-                                        <Card>
-                                            <Heading size="xs">Active Groups</Heading>
-                                            <Text size="sm">
-                                                blah, blah.
-                                            </Text>
+                                            <div className="flex items-center justify-end mt-2">
+                                                <UserAvatar user={{
+                                                    username: 'johndoe',
+                                                    nickname: 'John Doe',
+                                                    avatar: 'https://cdn.discordapp.com/avatars/96876194712018944/cc2e74005ac5b978e62da06200049385.webp?size=4096',
+                                                }} className="inline-flex items-center justify-center h-6 w-6 mr-1 bg-n-1 rounded overflow-hidden dark:bg-n-7"/>
+                                                Rek
+                                            </div>
                                         </Card>
 
                                         {posts.map((post: any) => (

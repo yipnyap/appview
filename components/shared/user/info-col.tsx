@@ -59,9 +59,9 @@ export function UserInfo({ user, size }: {
     size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 }) {
     return (
-        <div className="flex flex-row gap-2">
-            <UserAvatar user={user} size={size} />
-            <div className="flex flex-col gap-1">
+        <div className="flex flex-row items-center gap-2">
+            <UserAvatar user={user} size={size || 'md'} />
+            <div className="flex flex-col">
                 <span className="text-sm font-semibold">{user.username || user.avatar}</span>
                 <span className="self-baseline text-xs text-alt unicorn:text-on-surface-variant/50">{user.tag || 'piss'}</span>
             </div>

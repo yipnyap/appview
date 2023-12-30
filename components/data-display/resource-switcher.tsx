@@ -4,11 +4,12 @@ import {useState} from 'react'
 import {ChevronDownIcon} from '@heroicons/react/20/solid'
 import {Logo} from '@/components/shared/icons/logo'
 import {Text} from '@/components/shared/text'
+import UserAvatar from '@/components/shared/user/avatar'
 
 export default function ResourceSwitcher() {
     const [currentResource, setCurrentResource] = useState({
         did: 'did:web:_universe.yipnyap.me',
-        name: 'Yipnyap',
+        name: `Pre-Alpha ${process.env.NEXT_PUBLIC_COMMIT_HASH}`,
     })
 
     return (
@@ -20,14 +21,10 @@ export default function ResourceSwitcher() {
                 </div>
             ) : (
                 <span className="flex min-w-0 items-center justify-between space-x-3">
-                    <img
-                        className="w-8 h-8 bg-slate-300 rounded flex-shrink-0"
-                        src="https://img.icons8.com/fluency/344/info.png"
-                        alt=""
-                    />
+                    <UserAvatar name={currentResource.name} size={40} className="inline-flex h-10 w-10 rounded overflow-hidden"/>
                     <span className="flex-1 flex flex-col min-w-0">
-                        <span className="text-slate-900 dark:text-white text-sm font-medium truncate">Local</span>
-                        <span className="text-slate-500 dark:text-grey-400 text-sm truncate">local@local</span>
+                        <span className="text-slate-900 dark:text-white text-sm font-medium truncate">{currentResource.name}</span>
+                        <span className="text-slate-500 dark:text-grey-400 text-sm truncate">{currentResource.did}</span>
                     </span>
                 </span>
             )}

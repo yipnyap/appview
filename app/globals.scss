@@ -15,10 +15,11 @@ $colors: (
         //'bg-body-acrylic': theme('colors.n.1/50'),
         'bg-card-alt': #f5f5f5,
         'bg-sidebar': #FFF,
+        'bg-hover': rgb(243, 243, 243),
 
-        'text-body': #525252,
-        'text-alt': theme('colors.n.5'),
-        'fill-alt': theme('colors.n.5'),
+        'text-body': theme('colors.n.6'),
+        'text-alt': theme('colors.n.4'),
+        'fill-alt': theme('colors.n.4'),
 
         'border-default': #e5e5e5,
 );
@@ -28,6 +29,7 @@ $colors-dark: (
         //'bg-body-acrylic': theme('colors.n.7/50'),
         'bg-card-alt': theme('colors.n.5'),
         'bg-sidebar': theme('colors.n.6'),
+        'bg-hover': rgb(36, 36, 36),
 
         'text-body': #FFF,
         'text-alt': theme('colors.n.4'),
@@ -74,6 +76,11 @@ html.dark {
         --color-n-6: 42 42 42;
         --color-n-7: 30 30 30;
         --color-n-8: 20 20 20;
+    }
+
+    // hover
+    .bg-hover {
+        background-color: var(--color-bg-hover);
     }
 }
 

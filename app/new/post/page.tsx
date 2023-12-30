@@ -17,21 +17,20 @@ export default function NewPost() {
 
             <div className="py-14">
                 {!editorIsOpen && (
-                    <div className="flex items-center w-full bg-n-7 p-4 space-x-4 border rounded-lg"
+                    <div className="flex items-center w-full p-4 space-x-4 border rounded-lg bg-n-1 dark:bg-n-7"
                          onClick={() => setEditorIsOpen(true)}>
                         <UserAvatar user={user || {
                             id: 1,
                             username: 'johndoe',
                             nickname: 'John Doe',
                             avatar: 'https://cdn.discordapp.com/avatars/96876194712018944/cc2e74005ac5b978e62da06200049385.webp?size=4096',
-                        }}
-                                    className="inline-flex items-center justify-center h-10 w-10 bg-n-1 rounded overflow-hidden dark:bg-n-7"/>
+                        }} className="inline-flex items-center justify-center h-10 w-10 rounded overflow-hidden"/>
                         <Heading size="sm" className="text-alt font-semibold">Speak {`'`}yo mind.</Heading>
                     </div>
                 )}
 
                 {editorIsOpen && (
-                    <div className="flex flex-col justify-center w-full bg-n-7 p-6 space-y-4 border rounded-lg"
+                    <div className="flex flex-col justify-center w-full p-6 space-y-4 border rounded-lg bg-n-1 dark:bg-n-7"
                          onClick={() => setEditorIsOpen(true)}>
                         <div className="flex items-center">
                             <UserAvatar user={user || {
@@ -39,8 +38,7 @@ export default function NewPost() {
                                 username: 'johndoe',
                                 nickname: 'John Doe',
                                 avatar: 'https://cdn.discordapp.com/avatars/96876194712018944/cc2e74005ac5b978e62da06200049385.webp?size=4096',
-                            }}
-                                        className="inline-flex items-center justify-center h-10 w-10 bg-n-1 rounded overflow-hidden dark:bg-n-7"/>
+                            }} className="inline-flex items-center justify-center h-10 w-10 bg-n-1 rounded overflow-hidden dark:bg-n-7"/>
                             <div className="flex flex-col ml-3">
                                 <Text>{user?.nickname || 'Not signed in'}</Text>
                                 <Text

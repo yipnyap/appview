@@ -1,5 +1,6 @@
 const plugin = require("tailwindcss/plugin");
 const {default: flattenColorPalette} = require('tailwindcss/lib/util/flattenColorPalette');
+const colors = require('tailwindcss/colors')
 
 module.exports = {
   darkMode: "class",

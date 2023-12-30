@@ -355,9 +355,9 @@ const CommandList = ({
       {items.map((item: CommandItemProps, index: number) => {
         return (
           <button
-            className={`flex w-full items-center space-x-2 rounded-md px-2 py-1 text-left text-sm hover:bg-n-8/25 hover:unicorn:bg-surface-variant ${
+            className={`flex w-full items-center space-x-2 rounded-md px-2 py-1 text-left text-sm hover:bg-hover hover:unicorn:bg-surface-variant ${
               index === selectedIndex
-                ? "bg-n-2 dark:bg-n-8/25 unicorn:bg-surface-variant"
+                ? "bg-hover unicorn:bg-surface-variant"
                 : ""
             }`}
             key={index}

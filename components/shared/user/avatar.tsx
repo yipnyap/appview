@@ -1,24 +1,40 @@
 import * as Avatar from '@radix-ui/react-avatar'
+import BoringAvatar from 'boring-avatars'
+import Image from 'next/image'
+import {cn} from '@/components/novel/lib/utils'
+import {clsx} from 'clsx'
 
-export default function UserAvatar({ user, size = 'md', ...props }: {
-    user: any; // object - @todo: type this
-    size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+export default function UserAvatar({ user, size, ...props }: {
+    user?: any; // object - @todo: type this
+    size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | number;
     [x: string]: any;
 }) {
     const sizes = {
         xs: 'h-4 w-4',
         sm: 'h-6 w-6',
         md: 'h-8 w-8',
-        lg: 'h-12 w-12',
-        xl: 'h-16 w-16',
-        '2xl': 'h-24 w-24',
+        lg: 'h-10 w-10',
+        xl: 'h-12 w-12',
+        '2xl': 'h-14 w-14',
     }
-    return (
-        <Avatar.Root className={`inline-flex ${sizes[size]} justify-center items-center bg-n-5 text-white rounded-full overflow-hidden`} {...props}>
-            <Avatar.Image src={user.avatar} alt={user.username || user.name} className="w-full h-full" />
-            <Avatar.Fallback>
-                {(user.username || user.name).slice(0, 2).toUpperCase()}
-            </Avatar.Fallback>
-        </Avatar.Root>
-    )
+
+    props.className = `${props.className || ''} ${size && typeof size !== 'number' ? sizes[size] : ''}`
+
+    if (!user || !user.avatar) {
+        return (
+            <div className={props.className}>
+                <BoringAvatar variant="beam" square size={typeof size === 'number' ? size : 32} {...props} />
+            </div>
+        )
+    } else {
+        return (
+            <Image width={1024}
+                   height={1024}
+                   src={user.avatar}
+                   alt={`${user.username}'s avatar`}
+                   {...props}
+                   className={cn(clsx(props.className, `inline-flex ${size && typeof size !== 'number' ? sizes[size] : ''} justify-center rounded items-center bg-n-5 text-white overflow-hidden`))}
+            />
+        )
+    }
 }

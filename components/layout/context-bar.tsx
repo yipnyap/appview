@@ -38,7 +38,7 @@ export default function ContextBar() {
                             <>
                                 {/* Search button */}
                                 <div
-                                    className="flex flex-grow items-center py-1.5 px-2 rounded bg-n-1 dark:bg-n-7 cursor-pointer hover:inner-border hover:inner-border-[#e5e5e5] hover:dark:inner-border-[#2e2e2e] hover:unicorn:inner-border-outline/25">
+                                    className="flex flex-grow items-center py-1.5 px-2 rounded-lg bg-n-3 dark:bg-n-7 cursor-pointer hover:bg-n-4/25 hover:dark:inner-border hover:dark:inner-border-[#2e2e2e] hover:dark:unicorn:inner-border-outline/25">
                                     <div className="mr-1.5">
                                         <SearchIcon className="w-3 h-3"/>
                                     </div>

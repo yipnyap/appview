@@ -59,7 +59,7 @@ function Layout({children}: {children: React.ReactNode}) {
             }} />
 
             {/* @todo: something should be done with the sidebar, vaul uses translate3d() which breaks fixed/sticky anchors */}
-            <div vaul-drawer-wrapper="" id="BodyScroll" className="flex p-0 bg-n-8 text-sm unicorn:bg-surface-container-low md:overflow-hidden">
+            <div vaul-drawer-wrapper="" id="BodyScroll" className="flex p-0 bg-n-2 text-sm unicorn:bg-surface-container-low md:overflow-hidden dark:bg-n-8">
                 <div className="flex flex-col flex-shrink-0 min-h-screen w-full">
                     <div className="flex flex-row grow max-w-full unicorn:bg-surface-container rounded-none md:rounded-default">
                         {/* The parent is already growing, however children need to be forced the same in a separate flexbox */}
@@ -70,7 +70,7 @@ function Layout({children}: {children: React.ReactNode}) {
 
                                 {/* Main content */}
                                 <div className="flex flex-col flex-grow px-4 pb-0 h-screen overflow-y-auto">
-                                    <div className="mb-4 overflow-hidden">
+                                    <div className="mb-4">
                                         <Banner branded title="Feral is WIP" description="This version should only be used by those developing Yipnyap, or for those curious. Don't report bugs, we most likely know already." icon={AlertOctagon} />
                                     </div>
                                     <Preload>

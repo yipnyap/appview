@@ -50,7 +50,7 @@ export default function ResourceAggregator() {
                                height={1024}
                                width={1024}
                                style={{
-                                   imageRendering: 'pixelated',
+                                   imageRendering: 'pixelated'
                                }}
                         />
                         <Heading className="items-center">
