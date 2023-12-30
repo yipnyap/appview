@@ -36,10 +36,6 @@ export default function ResourceSwitcher() {
     }[] = [
         resourceDefault,
         {
-            did: 'localhost:3000',
-            name: 'Yipnyap Feedback',
-        },
-        {
             did: 'floodchat.pack.yipnyap.me',
             name: 'The Flood Chat',
             icon: 'https://cdn.discordapp.com/icons/333623134152294401/4352917374ecb07503ef9022a75de44d.webp?size=96',
@@ -53,6 +49,73 @@ export default function ResourceSwitcher() {
             did: 'sozlol.pack.yipnyap.me',
             name: 'These aren\'t real',
         },
+
+        // taken from https://api.yipnyap.me/api/v2/member/1/groups
+        {
+            name: "my lil kittens",
+            did: "kittycentral",
+            icon: "https://api.yipnyap.me/vault/@server/themes/hb-theme/img/avatar/default-avatar.png",
+        },
+        {
+            name: "bra hate group",
+            did: 'bra-hate-group',
+            icon: "https://api.yipnyap.me/vault/@server/uploads/groups/27/avatars/1668762746-bpfull.png",
+        },
+        {
+            name: "Therian/Otherkin",
+            did: "therian-otherkin",
+            icon: "https://api.yipnyap.me/vault/@server/uploads/groups/62/avatars/1689289531-bpfull.png",
+        },
+        {
+            name: "mariah carey support group",
+            did: "mariah-carey-support-group",
+            icon: "https://api.yipnyap.me/vault/@server/uploads/groups/31/avatars/1671430179-bpfull.png",
+        },
+        {
+            name: "OC Lore",
+            did: "oc-lore-discussion",
+            icon: "https://api.yipnyap.me/vault/@server/uploads/groups/17/avatars/1667917892-bpfull.png",
+        },
+        {
+            did: "oc-reference-share",
+            name: "OC Reference Share",
+            icon: "https://api.yipnyap.me/vault/@server/uploads/groups/10/avatars/1667840041-bpfull.png",
+        },
+        {
+            did: "sfw-art-commissions",
+            name: "SFW Art Commissions",
+            icon: "https://api.yipnyap.me/vault/@server/uploads/groups/7/avatars/1667776775-bpfull.png",
+        },
+        {
+            did: "foxes-every-day",
+            name: "Foxes Every Day",
+            icon: "https://api.yipnyap.me/vault/@server/uploads/groups/19/avatars/1667929898-bpfull.jpg",
+        },
+        {
+            name: "Car Furs",
+            did: "car-furs",
+            icon: "https://api.yipnyap.me/vault/@server/uploads/groups/18/cover-image/636a8b9646a9d-yp-cover-image.jpg",
+        },
+        {
+            name: "Rhythm Game Furs",
+            did: "rhythm-game-furs",
+            icon: "https://api.yipnyap.me/vault/@server/uploads/groups/16/avatars/1667916953-bpfull.jpg",
+        },
+        {
+            name: "The Critique Place",
+            did: "the-critique-place",
+            icon: "https://api.yipnyap.me/vault/@server/uploads/groups/13/avatars/1667857287-bpfull.png",
+        },
+        {
+            name: "A Goofy Silly Little Place",
+            did: "a-goofy-silly-little-place",
+            icon: "https://api.yipnyap.me/vault/@server/uploads/groups/5/avatars/1667762903-bpfull.jpg",
+        },
+        {
+            name: "Yipnyap Feedback",
+            did: "yipnyap-feedback",
+            icon: "https://api.yipnyap.me/vault/@server/uploads/groups/2/avatars/1668149891-bpfull.png",
+        }
     ]
 
     const playSound = (sound: PlayFunction) => {
@@ -90,8 +153,8 @@ export default function ResourceSwitcher() {
             <div>
                 {isComponentVisible && (
                     <div
-                        className="absolute animate-fade-in top-0 left-0 bg-white border-b w-full rounded rounded-tr-none rounded-tl-none shadow-sm pt-[64px] dark:bg-n-7">
-                        <div className="relative max-h-80 overflow-y-auto">
+                        className="absolute animate-fade-in top-0 left-0 h-screen bg-white border-b w-full rounded rounded-tr-none rounded-tl-none shadow-sm pt-[64px] dark:bg-n-7">
+                        <div className="relative h-full overflow-y-auto">
                             <div className="flex flex-col">
                                 {/* loop excluding current */}
                                 {availableResources.map((resource) => {
