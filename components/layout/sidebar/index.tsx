@@ -18,7 +18,7 @@ export default function Sidebar({navigation}: {
     ]
     return (
         <div className="hidden flex-col w-80 min-w-[20rem] bg-n-2 dark:bg-n-8 unicorn:bg-surface-container-low md:flex">
-            <div className="flex flex-row items-center justify-between py-3 px-5 mb-2">
+            <div className="relative py-3 px-5 mb-2">
                 <ResourceSwitcher />
             </div>
 

@@ -1,6 +1,5 @@
 const plugin = require("tailwindcss/plugin");
 const {default: flattenColorPalette} = require('tailwindcss/lib/util/flattenColorPalette');
-const colors = require('tailwindcss/colors')
 
 module.exports = {
   darkMode: "class",
@@ -127,6 +126,7 @@ module.exports = {
         // Tooltip
         "slide-up-fade": "slide-up-fade 0.3s cubic-bezier(0,1.25,.97,.89) forwards",
         "slide-down-fade": "slide-down-fade 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
+        "fade-in": "fade-in 0.1s ease-in forwards",
       },
       keyframes: {
         hue: {
@@ -173,6 +173,10 @@ module.exports = {
         "slide-down-fade": {
           "0%": { opacity: 0, transform: "translateY(-6px)" },
           "100%": { opacity: 1, transform: "translateY(0)" },
+        },
+        "fade-in": {
+          "0%": { opacity: 0 },
+          "100%": { opacity: 1 },
         },
       },
     },
