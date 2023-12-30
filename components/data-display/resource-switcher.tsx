@@ -6,11 +6,13 @@ import {Logo} from '@/components/shared/icons/logo'
 import {Text} from '@/components/shared/text'
 import UserAvatar from '@/components/shared/user/avatar'
 import useComponentVisible from '@/lib/hooks/use-component-visible'
+import useSound from 'use-sound'
+import {PlayFunction} from 'use-sound/dist/types'
 
 export default function ResourceSwitcher() {
-    const initialSound = new Audio('/sounds/switcher.ogg')
-    const switchedSound = new Audio('/sounds/switched.ogg')
-    const cancelSound = new Audio('/sounds/switchcancel.ogg')
+    // sound refs
+    const [initialSound] = useSound('/sounds/switcher.ogg')
+    const [switchedSound] = useSound('/sounds/switched.ogg')
 
     const resourceDefault = {
         did: '_universe.yipnyap.me',
@@ -18,9 +20,7 @@ export default function ResourceSwitcher() {
         standalone: true,
     }
 
-    const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible({
-        soundOnClose: cancelSound,
-    });
+    const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible();
     const [currentResource, setCurrentResource] = useState<{
         did: string;
         name: string;
@@ -55,12 +55,8 @@ export default function ResourceSwitcher() {
         },
     ]
 
-    const playSound = (sound: HTMLAudioElement) => {
-        // if already playing, reset
-        if (sound.currentTime > 0) {
-            sound.currentTime = 0
-        }
-        sound.play()
+    const playSound = (sound: PlayFunction) => {
+        sound()
     }
 
     useEffect(() => {
@@ -76,7 +72,7 @@ export default function ResourceSwitcher() {
     return (
         <div ref={ref} className="flex flex-row items-center justify-between shimmer-template">
             <span className="flex z-10 w-full justify-between items-center cursor-pointer" onClick={() => {
-                playSound(isComponentVisible ? cancelSound : initialSound)
+                if (!isComponentVisible) playSound(initialSound)
                 setIsComponentVisible(!isComponentVisible)
             }}>
                 {!currentResource || currentResource.standalone ? (

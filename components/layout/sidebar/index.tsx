@@ -1,7 +1,5 @@
-import {Logo} from '@/components/shared/icons/logo'
 import {Text} from '@/components/shared/text'
-import {ClockIcon, HomeIcon, InboxIcon, PenSquareIcon} from 'lucide-react'
-import {ChevronDownIcon} from '@heroicons/react/20/solid'
+import {BellIcon, HomeIcon, PenSquareIcon} from 'lucide-react'
 import Link from 'next/link'
 import ResourceSwitcher from '@/components/data-display/resource-switcher'
 
@@ -14,10 +12,10 @@ export default function Sidebar({navigation}: {
 }) {
     navigation = navigation || [
         { name: 'Your Home', href: '/', icon: HomeIcon, },
-        { name: 'Inbox', href: '/inbox', icon: InboxIcon,  },
+        { name: 'Inbox', href: '/inbox', icon: BellIcon,  },
     ]
     return (
-        <div className="hidden flex-col w-80 min-w-[20rem] bg-n-2 dark:bg-n-8 unicorn:bg-surface-container-low md:flex">
+        <div className="hidden flex-col w-80 min-w-[20rem] bg-n-2 overflow-hidden dark:bg-n-8 unicorn:bg-surface-container-low md:flex">
             <div className="relative py-3 px-5 mb-2">
                 <ResourceSwitcher />
             </div>
@@ -28,7 +26,7 @@ export default function Sidebar({navigation}: {
                     <button
                         className="flex justify-start items-center w-full px-2 py-1.5 cursor-pointer bg-primary-feral text-white unicorn:text-on-primary rounded-md">
                         <PenSquareIcon className="w-4 h-4"/>
-                        <span className="ml-2 mr-1">Write</span>
+                        <span className="ml-2 mr-1">Howl</span>
                     </button>
                 </Link>
             </div>

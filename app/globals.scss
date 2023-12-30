@@ -168,6 +168,10 @@ a:not(.no-style) {
     animation: slideUp 300ms cubic-bezier(0.32, 0.72, 0, 1);
 }
 
+.shimmer-template {
+    @apply before:absolute before:inset-0 before:border before:border-solid before:border-x-0 before:border-b-0 before:border-t before:-translate-x-full before:bg-gradient-to-r before:from-transparent before:via-neutral-500/5 before:to-transparent;
+}
+
 @keyframes slide-up-fade-out {
     0% {
         opacity: 0;

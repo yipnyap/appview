@@ -1,7 +1,8 @@
 import {useEffect, useRef, useState} from 'react'
+import {PlayFunction} from 'use-sound/dist/types'
 
 export default function useComponentVisible(opts?: {
-    soundOnClose?: HTMLAudioElement;
+    soundOnClose?: PlayFunction;
 }) {
     const [isComponentVisible, setIsComponentVisible] = useState(false);
     const ref = useRef<any>(null);
@@ -10,10 +11,7 @@ export default function useComponentVisible(opts?: {
         if (ref.current && !ref.current.contains(event.target) && isComponentVisible) {
             setIsComponentVisible(false);
             if (opts?.soundOnClose) {
-                if (opts.soundOnClose.currentTime > 0) {
-                    opts.soundOnClose.currentTime = 0
-                }
-                opts.soundOnClose.play()
+                opts.soundOnClose()
             }
         }
     };
