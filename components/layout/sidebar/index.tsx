@@ -36,11 +36,15 @@ export default function Sidebar({navigation}: {
             <div>
                 {navigation.map((item) => (
                     <Link key={item.name} href={item.href}
-                          className="flex items-center w-full px-6 py-2 cursor-pointer hover:bg-n-3/50 dark:hover:bg-n-7/50">
-                        <item.icon className="w-5 h-5"/>
-                        <Text size="sm" className="ml-2">{item.name}</Text>
+                          className="flex items-center w-full px-6 py-1 mb-0.5 cursor-pointer hover:bg-n-3/50 dark:hover:bg-n-7/50">
+                        <div className="flex items-center">
+                            <div>
+                                <item.icon className="w-[18px] h-[18px] m-[3px]" strokeWidth={1.5}/>
+                            </div>
+                            <Text size="sm" className="ml-2 text-sm font-normal">{item.name}</Text>
+                            </div>
                     </Link>
-                ))}
+                    ))}
             </div>
         </div>
     )
