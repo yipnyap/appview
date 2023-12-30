@@ -23,8 +23,8 @@ export default function ResourceSwitcher() {
                 <span className="flex min-w-0 items-center justify-between space-x-3">
                     <UserAvatar name={currentResource.name} size={40} className="inline-flex h-10 w-10 rounded overflow-hidden"/>
                     <span className="flex-1 flex flex-col min-w-0">
-                        <span className="text-slate-900 dark:text-white text-sm font-medium truncate">{currentResource.name}</span>
-                        <span className="text-slate-500 dark:text-grey-400 text-sm truncate">{currentResource.did}</span>
+                        <span className="truncate">{currentResource.name}</span>
+                        <span className="text-alt truncate">{currentResource.did}</span>
                     </span>
                 </span>
             )}
