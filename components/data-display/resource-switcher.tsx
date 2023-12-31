@@ -14,6 +14,10 @@ export default function ResourceSwitcher() {
     const [initialSound] = useSound('/sounds/switcher.ogg')
     const [switchedSound] = useSound('/sounds/switched.ogg')
     const [cancelSound] = useSound('/sounds/switchcancel.ogg')
+    const [hoverSound] = useSound('/sounds/switch-hover-s.ogg', {
+        volume: 0.25,
+        interrupt: true,
+    })
 
     const resourceDefault = {
         did: '_universe.yipnyap.me',
@@ -166,7 +170,11 @@ export default function ResourceSwitcher() {
                                                  playSound(resource.did === '_universe.yipnyap.me' ? cancelSound : switchedSound)
                                                  setCurrentResource(resource)
                                                  setIsComponentVisible(false)
-                                             }}>
+                                             }}
+                                             onMouseEnter={() => {
+                                                 playSound(hoverSound)
+                                             }}
+                                        >
                                             {resource.standalone && (
                                                 <div
                                                     className="flex items-center py-3 px-5 space-x-2 hover:bg-hover cursor-pointer">
