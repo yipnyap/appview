@@ -13,6 +13,7 @@ export default function ResourceSwitcher() {
     // sound refs
     const [initialSound] = useSound('/sounds/switcher.ogg')
     const [switchedSound] = useSound('/sounds/switched.ogg')
+    const [cancelSound] = useSound('/sounds/switchcancel.ogg')
 
     const resourceDefault = {
         did: '_universe.yipnyap.me',
@@ -162,7 +163,7 @@ export default function ResourceSwitcher() {
                                     return (
                                         <div key={resource.did} className="flex flex-col"
                                              onClick={() => {
-                                                 playSound(switchedSound)
+                                                 playSound(resource.did === '_universe.yipnyap.me' ? cancelSound : switchedSound)
                                                  setCurrentResource(resource)
                                                  setIsComponentVisible(false)
                                              }}>
