@@ -148,6 +148,7 @@ export default function ResourceSwitcher() {
                         toast.error('The resource is experiencing an outage.', {
                             description: `"${resource!.name}" is not available. You have been switched back to the Universe.`,
                         })
+                        setCurrentResource(resourceDefault)
                         playSound(failedSound)
                     }
 
@@ -157,6 +158,7 @@ export default function ResourceSwitcher() {
                     toast.error('The resource is experiencing an outage.', {
                         description: `"${resource!.name}" is not available. You have been switched back to the Universe.`,
                     })
+                    setCurrentResource(resourceDefault)
                     playSound(failedSound)
                     setLoading(false)
                     ref.current.classList.remove('before:animate-shimmer-fast')
