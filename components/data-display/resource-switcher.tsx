@@ -11,8 +11,9 @@ import {toast} from '@/lib/toast'
 import {useCurrentEditor} from '@tiptap/react'
 import {useResourceStore, useResourceUIStore} from '@/lib/states'
 import {useEffect, useState} from 'react'
-import {LoadingCircle, LoadingSpinner} from '@/components/shared/icons'
+import {ExpandingArrow, LoadingCircle, LoadingSpinner} from '@/components/shared/icons'
 import {fetcher} from '@/lib/utils'
+import {XIcon} from 'lucide-react'
 
 export default function ResourceSwitcher() {
     // sound refs
@@ -31,6 +32,7 @@ export default function ResourceSwitcher() {
     const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible();
     // fuck you nextjs
     const [domReady, setDomReady] = useState(false)
+    const [animationPlaying, setAnimationPlaying] = useState(false)
 
     const availableResources: {
         id: string | number;
@@ -132,38 +134,37 @@ export default function ResourceSwitcher() {
         setCurrentResource(resource)
 
         if (ref.current) {
-            ref.current.classList.add('before:animate-shimmer-fast')
-            setTimeout(() => {
-                if (resource.standalone) {
-                    setLoading(false)
+            setAnimationPlaying(true)
+            ref.current?.classList.add('before:animate-shimmer-fast')
+            if (resource.standalone) {
+                setLoading(false)
+                setAnimationPlaying(false)
+                playSound(heavyHoverSound)
+                return
+            }
+
+            fetcher(`${process.env.NEXT_PUBLIC_YIPNYAP_CORE_URL}/v2/groups/${resource.id}`).then((res) => {
+                if (res.E2ID) {
                     playSound(heavyHoverSound)
-                    ref.current.classList.remove('before:animate-shimmer-fast')
-                    return
-                }
-
-                fetcher(`${process.env.NEXT_PUBLIC_YIPNYAP_CORE_URL}/v2/groups/${resource.id}`).then((res) => {
-                    if (res.E2ID) {
-                        playSound(heavyHoverSound)
-                    } else {
-                        toast.error('The resource is experiencing an outage.', {
-                            description: `"${resource!.name}" is not available. You have been switched back to the Universe.`,
-                        })
-                        setCurrentResource(resourceDefault)
-                        playSound(failedSound)
-                    }
-
-                    setLoading(false)
-                    ref.current.classList.remove('before:animate-shimmer-fast')
-                }).catch((err) => {
+                } else {
                     toast.error('The resource is experiencing an outage.', {
                         description: `"${resource!.name}" is not available. You have been switched back to the Universe.`,
                     })
                     setCurrentResource(resourceDefault)
                     playSound(failedSound)
-                    setLoading(false)
-                    ref.current.classList.remove('before:animate-shimmer-fast')
+                }
+
+                setLoading(false)
+                setAnimationPlaying(false)
+            }).catch((err) => {
+                toast.error('The resource is experiencing an outage.', {
+                    description: `"${resource!.name}" is not available. You have been switched back to the Universe.`,
                 })
-            }, 1000)
+                setCurrentResource(resourceDefault)
+                playSound(failedSound)
+                setLoading(false)
+                setAnimationPlaying(false)
+            })
         }
     }
 
@@ -177,7 +178,10 @@ export default function ResourceSwitcher() {
         <>
             {domReady ? (
                 <div ref={ref}
-                     className="group flex flex-row items-center justify-between cursor-pointer shimmer-template select-none"
+                     className="group flex flex-row items-center justify-between cursor-pointer shimmer-template select-none before:animate-shimmer-fast"
+                     onAnimationIteration={() => {
+                         if (!animationPlaying) ref.current?.classList.remove('before:animate-shimmer-fast')
+                     }}
                      onClick={() => {
                          if (loading) return
                          if (!isComponentVisible) playSound(initialSound)
