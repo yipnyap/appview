@@ -108,7 +108,7 @@ export default function FeedPost({...props}: NGFeedPostType) {
                             <div className="flex items-center text-sm mb-6">
                                 <UserGroupIcon className="w-4 h-4 mr-2" />
                                 <Link href={`/pack/@${postContent?.group.GroupMeta?.slug}/`} className="flex gap-2 items-center text-default-alt">
-                                    <UserAvatar user={postContent?.group.GroupMeta} />
+                                    <UserAvatar size="sm" user={postContent?.group.GroupMeta} />
                                     {postContent?.group.GroupMeta?.name}
                                 </Link>
                             </div>

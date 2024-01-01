@@ -2,8 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-@import 'styles/unicorn/monet-to-class';
-@import 'styles/unicorn/texture';
+@import 'unicorn/monet-to-class';
+@import 'unicorn/texture';
 
 @mixin background-opacity($color, $opacity: 0.3) {
     background: $color; /* The Fallback */
@@ -112,6 +112,20 @@ a:not(.no-style) {
         @for $x from 0 through $n {
             &:nth-child(#{$x}) {
                 animation-delay: 100ms * ($x - 1) !important;
+            }
+        }
+    }
+}
+
+.switcher-list-stagger > * {
+    & > * {
+        $n: 50;
+        opacity: 0;
+        animation: slide-up-fade 0.3s ease forwards;
+
+        @for $x from 0 through $n {
+            &:nth-child(#{$x}) {
+                animation-delay: 15ms * ($x - 1) !important;
             }
         }
     }

@@ -51,3 +51,63 @@ export const useUserAccountStore = create(persist<UserAccountStore>(
         name: 'user-account',
     }
 ));
+
+/**
+ * Resource store
+ */
+interface ResourceStore {
+    resourceDefault: {
+        id: string | number;
+        name: string;
+        standalone: boolean;
+        available: boolean;
+    };
+    currentResource: any;
+    resources: any[];
+    setCurrentResource: (currentResource: any) => void;
+    setResources: (resources: any[]) => void;
+}
+
+const resourceDefault = {
+    id: '',
+    name: `Pre-Alpha ${process.env.NEXT_PUBLIC_COMMIT_HASH}`,
+    standalone: true,
+    available: true,
+}
+
+export const useResourceStore = create(persist<ResourceStore>(
+    (set) => ({
+        resourceDefault,
+        currentResource: null,
+        resources: [],
+        setCurrentResource: (currentResource) => set((state) => ({
+            ...state,
+            currentResource,
+        })),
+        setResources: (resources) => set((state) => ({
+            ...state,
+            resources,
+        })),
+    }),
+    {
+        name: 'resource',
+    }
+));
+
+/**
+ * Resource UI store, not persistent
+ */
+interface ResourceUIStore {
+    loading: boolean;
+    setLoading: (loading: boolean) => void;
+}
+
+export const useResourceUIStore = create<ResourceUIStore>(
+    (set) => ({
+        loading: false,
+        setLoading: (loading) => set((state) => ({
+            ...state,
+            loading,
+        })),
+    })
+);

@@ -1,7 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
-    <string name="app_name">yipnyap</string>
-    <string name="title_activity_main">yipnyap</string>
-    <string name="package_name">me.yipnyap.app</string>
-    <string name="custom_url_scheme">me.yipnyap.app</string>
-</resources>

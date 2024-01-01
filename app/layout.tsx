@@ -1,4 +1,4 @@
-import './globals.scss'
+import './styles/globals.scss'
 import { Analytics } from '@vercel/analytics/react'
 import cx from 'classnames'
 import { inter } from "./fonts"

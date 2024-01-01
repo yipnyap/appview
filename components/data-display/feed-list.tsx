@@ -17,12 +17,11 @@ import Popover from '@/components/shared/popover'
 import {useUIStore} from '@/lib/states'
 import UserAvatar from '@/components/shared/user/avatar'
 
-export default function FeedList({...props}: {
-    feedID: string;
+export default function FeedList({feedID, feedType, onlyParent}: {
+    feedID: string | number;
     feedType?: 'feed' | 'user' | 'pack';
     onlyParent?: boolean;
 }) {
-    const [feedID, setFeedID] = useState<string>(props.feedID || 'Guest');
     const [postsReady, setPostsReady] = useState<boolean>(false);
     const [postsHasMore, setPostsHasMore] = useState<boolean>(false);
     const [postsCurrentPage, setPostsCurrentPage] = useState<number>(1);
@@ -34,19 +33,40 @@ export default function FeedList({...props}: {
     const FeedViewConfig = useUIStore(state => state.feedView);
 
     useEffect(() => {
-        if (props.feedID !== feedID) {
+        let timeout: NodeJS.Timeout;
+        if (feedID) {
             // eslint-disable-next-line react-hooks/exhaustive-deps
             setPosts([]);
-            setFeedID(props.feedID || 'Guest');
             setPostsReady(false);
             setPostsHasMore(false);
             setPostsCurrentPage(1);
-        }
-    }, [props]);
 
-    // Fire once
-    useEffect(() => {
-        fetchPosts();
+            // if feedID starts with 02A1
+            timeout = setTimeout(() => {
+                if (feedID === 'Guest') {
+                    fetchPosts('', true);
+                    return;
+                } else {
+                    if (!feedID.toString().startsWith('02A1')) {
+                        fetcher(`${process.env.NEXT_PUBLIC_YIPNYAP_CORE_URL}/v2/groups/${feedID}`).then((res) => {
+                            if (res.E2ID) {
+                                fetchPosts(res.E2ID, true);
+                            } else {
+                                setPostsReady(true);
+                            }
+                        })
+                    } else {
+                        console.log('wahhhh')
+                        fetchPosts('', true);
+                    }
+                }
+            }, 1000);
+        }
+
+        return () => {
+            console.log('nope')
+            if (timeout) clearTimeout(timeout);
+        }
     }, [feedID]);
 
     useEffect(() => {
@@ -61,13 +81,17 @@ export default function FeedList({...props}: {
         }
     }, [FeedViewConfig]);
 
-    const fetchPosts = () => {
-        const feed = props.feedID === 'Guest' ? '' : props.feedID;
-        fetcher(`${process.env.NEXT_PUBLIC_YIPNYAP_CORE_URL}/v2/feed/?${props.feedType || 'feed'}=${feed}&page=${postsCurrentPage}${props.onlyParent ? '&onlyParent' : ''}`).then((res: any) => {
-            setPosts([...posts, ...res.posts]);
+    const fetchPosts = (feed: string = '', clearPosts = false) => {
+        fetcher(`${process.env.NEXT_PUBLIC_YIPNYAP_CORE_URL}/v2/feed/?${feedType || 'feed'}=${feed}&page=${postsCurrentPage}${onlyParent ? '&onlyParent' : ''}`).then((res: any) => {
+            if (clearPosts) {
+                setPosts(res.posts)
+                setPostsCurrentPage(1);
+            } else {
+                setPosts([...posts, ...res.posts]);
+                setPostsCurrentPage(postsCurrentPage + 1);
+            }
             setPostsReady(true);
             setPostsHasMore(res.hasMore);
-            setPostsCurrentPage(postsCurrentPage + 1);
         })
     }
 
