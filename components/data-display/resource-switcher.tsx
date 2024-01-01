@@ -182,7 +182,7 @@ export default function ResourceSwitcher() {
         }
     }, [])
 
-    const rows = shuffleArray([7, 6, 5, 5]);
+    const rows = shuffleArray([7, 6, 5]);
     return (
         <>
             {domReady ? (
