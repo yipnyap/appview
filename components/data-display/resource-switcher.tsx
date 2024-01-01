@@ -24,22 +24,26 @@ export default function ResourceSwitcher() {
         volume: 0.25,
         interrupt: true,
     })
-    // const [heavyHoverSound] = useSound('/sounds/switch-hover.ogg')
+    const [heavyHoverSound] = useSound('/sounds/switch-hover.ogg', {
+        playbackRate:.3,
+    })
     const [failedSound] = useSound('/sounds/switch-failed.ogg')
 
-    const {currentResource, resourceDefault, setCurrentResource} = useResourceStore()
-    const {loading, setLoading} = useResourceUIStore()
+    const {currentResource, setCurrentResource} = useResourceStore()
+
+    const {resourceDefault, loading, setLoading} = useResourceUIStore()
     const {ref, isComponentVisible, setIsComponentVisible} = useComponentVisible()
     // fuck you nextjs
     const [domReady, setDomReady] = useState(false)
     const [animationPlaying, setAnimationPlaying] = useState(false)
 
-    const availableResources: {
+    const [availableResources, setAvailableResources] = useState<{
         id: string | number;
         name: string;
         standalone?: boolean;
         icon?: string;
-    }[] = [
+        unavailable?: boolean;
+    }[]>([
         resourceDefault,
         {
             id: 'floodchat',
@@ -122,7 +126,7 @@ export default function ResourceSwitcher() {
             id: 'yipnyap-feedback',
             icon: 'https://api.yipnyap.me/vault/@server/uploads/groups/2/avatars/1668149891-bpfull.png',
         }
-    ]
+    ])
 
     const playSound = (sound: PlayFunction) => {
         sound()
@@ -164,6 +168,14 @@ export default function ResourceSwitcher() {
                 playSound(failedSound)
                 setLoading(false)
                 setAnimationPlaying(false)
+                setAvailableResources((prev) => {
+                    return prev.map((res) => {
+                        if (res.id === resource.id) {
+                            res.unavailable = true
+                        }
+                        return res
+                    })
+                })
             })
         }
     }
@@ -187,12 +199,21 @@ export default function ResourceSwitcher() {
         <>
             {domReady ? (
                 <div ref={ref}
-                     className="group flex flex-row items-center justify-between cursor-pointer shimmer-template select-none before:animate-shimmer-fast"
+                     className={`group flex flex-row items-center justify-between cursor-pointer shimmer-template select-none before:animate-shimmer-fast ${loading ? 'cursor-no-drop' : ''}`}
+                     aria-label="Switch resource"
+                     title={loading ? 'Resource is still switching...' : 'Switch resource'}
                      onAnimationIteration={() => {
-                         if (!animationPlaying) ref.current?.classList.remove('before:animate-shimmer-fast')
+                         ref.current?.classList.remove('animate-pulse-inverse')
+                         if (!animationPlaying) {
+                             setLoading(false)
+                             ref.current?.classList.remove('before:animate-shimmer-fast', 'cursor-disabled')
+                         }
                      }}
                      onClick={() => {
-                         if (loading) return
+                         if (loading) {
+                             ref.current?.classList.add('animate-pulse-inverse')
+                             return playSound(heavyHoverSound)
+                         }
                          if (!isComponentVisible) playSound(initialSound)
                          setIsComponentVisible(!isComponentVisible)
                      }}>
@@ -259,11 +280,17 @@ export default function ResourceSwitcher() {
                                                 </Text>
                                             </div>
                                         </div>
+
                                         {availableResources.map((resource) => {
                                             if (resource.id === currentResource.id) return null
                                             return (
-                                                <div key={resource.id} className="flex flex-col"
-                                                     onClick={() => {
+                                                <div key={resource.id} className={`flex flex-col ${resource.unavailable && '!opacity-50'}`}
+                                                     onClick={(e) => {
+                                                         if (resource.unavailable) {
+                                                             e.stopPropagation()
+                                                             toast.error(`"${resource!.name}" is not available right now.`)
+                                                             return playSound(heavyHoverSound)
+                                                         }
                                                          switchResource(resource)
                                                          setIsComponentVisible(false)
                                                      }}

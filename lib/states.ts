@@ -56,12 +56,6 @@ export const useUserAccountStore = create(persist<UserAccountStore>(
  * Resource store
  */
 interface ResourceStore {
-    resourceDefault: {
-        id: string | number;
-        name: string;
-        standalone: boolean;
-        available: boolean;
-    };
     currentResource: any;
     resources: any[];
     setCurrentResource: (currentResource: any) => void;
@@ -70,14 +64,13 @@ interface ResourceStore {
 
 const resourceDefault = {
     id: '',
-    name: `Pre-Alpha ${process.env.NEXT_PUBLIC_COMMIT_HASH}`,
+    name: `Pre Alpha ${process.env.NEXT_PUBLIC_COMMIT_HASH}`,
     standalone: true,
     available: true,
 }
 
 export const useResourceStore = create(persist<ResourceStore>(
     (set) => ({
-        resourceDefault,
         currentResource: resourceDefault,
         resources: [],
         setCurrentResource: (currentResource) => set((state) => ({
@@ -98,12 +91,19 @@ export const useResourceStore = create(persist<ResourceStore>(
  * Resource UI store, not persistent
  */
 interface ResourceUIStore {
+    resourceDefault: {
+        id: string | number;
+        name: string;
+        standalone: boolean;
+        available: boolean;
+    }
     loading: boolean;
     setLoading: (loading: boolean) => void;
 }
 
 export const useResourceUIStore = create<ResourceUIStore>(
     (set) => ({
+        resourceDefault,
         loading: false,
         setLoading: (loading) => set((state) => ({
             ...state,

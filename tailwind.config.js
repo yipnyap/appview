@@ -121,6 +121,8 @@ module.exports = {
         // Shimmer
         shimmer: "shimmer 1s ease-out infinite",
         "shimmer-fast": "shimmer 0.5s ease-in-out infinite",
+        // Pulse red
+        "pulse-inverse": "pulse-inverse 0.2s ease-out",
         // Fade up and down
         "fade-up": "fade-up 0.5s",
         "fade-down": "fade-down 0.5s",
@@ -133,6 +135,14 @@ module.exports = {
         hue: {
           "0%": { filter: "hue-rotate(0deg)" },
           "100%": { filter: "hue-rotate(360deg)" },
+        },
+        'pulse-inverse': {
+          '0%, 100%': {
+            opacity: 1,
+          },
+          '50%': {
+            opacity: 0.5,
+          },
         },
         shimmer: {
           '100%': {
