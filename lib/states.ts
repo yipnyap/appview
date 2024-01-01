@@ -78,7 +78,7 @@ const resourceDefault = {
 export const useResourceStore = create(persist<ResourceStore>(
     (set) => ({
         resourceDefault,
-        currentResource: null,
+        currentResource: resourceDefault,
         resources: [],
         setCurrentResource: (currentResource) => set((state) => ({
             ...state,
