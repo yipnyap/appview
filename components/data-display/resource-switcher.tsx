@@ -2,7 +2,7 @@
 
 import {ChevronDownIcon} from '@heroicons/react/20/solid'
 import {Logo} from '@/components/shared/icons/logo'
-import {Text} from '@/components/shared/text'
+import {Heading, Text} from '@/components/shared/text'
 import UserAvatar from '@/components/shared/user/avatar'
 import useComponentVisible from '@/lib/hooks/use-component-visible'
 import useSound from 'use-sound'
@@ -10,7 +10,7 @@ import {PlayFunction} from 'use-sound/dist/types'
 import {toast} from '@/lib/toast'
 import {useCurrentEditor} from '@tiptap/react'
 import {useResourceStore, useResourceUIStore} from '@/lib/states'
-import {useEffect, useState} from 'react'
+import {Key, useEffect, useState} from 'react'
 import {ExpandingArrow, LoadingCircle, LoadingSpinner} from '@/components/shared/icons'
 import {fetcher} from '@/lib/utils'
 import {XIcon} from 'lucide-react'
@@ -24,12 +24,12 @@ export default function ResourceSwitcher() {
         volume: 0.25,
         interrupt: true,
     })
-    const [heavyHoverSound] = useSound('/sounds/switch-hover.ogg')
+    // const [heavyHoverSound] = useSound('/sounds/switch-hover.ogg')
     const [failedSound] = useSound('/sounds/switch-failed.ogg')
 
     const {currentResource, resourceDefault, setCurrentResource} = useResourceStore()
     const {loading, setLoading} = useResourceUIStore()
-    const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible();
+    const {ref, isComponentVisible, setIsComponentVisible} = useComponentVisible()
     // fuck you nextjs
     const [domReady, setDomReady] = useState(false)
     const [animationPlaying, setAnimationPlaying] = useState(false)
@@ -58,69 +58,69 @@ export default function ResourceSwitcher() {
 
         // taken from https://api.yipnyap.me/api/v2/member/1/groups
         {
-            name: "my lil kittens",
-            id: "kittycentral",
-            icon: "https://api.yipnyap.me/vault/@server/themes/hb-theme/img/avatar/default-avatar.png",
+            name: 'my lil kittens',
+            id: 'kittycentral',
+            icon: 'https://api.yipnyap.me/vault/@server/themes/hb-theme/img/avatar/default-avatar.png',
         },
         {
-            name: "bra hate group",
+            name: 'bra hate group',
             id: 'bra-hate-group',
-            icon: "https://api.yipnyap.me/vault/@server/uploads/groups/27/avatars/1668762746-bpfull.png",
+            icon: 'https://api.yipnyap.me/vault/@server/uploads/groups/27/avatars/1668762746-bpfull.png',
         },
         {
-            name: "Therian/Otherkin",
-            id: "therian-otherkin",
-            icon: "https://api.yipnyap.me/vault/@server/uploads/groups/62/avatars/1689289531-bpfull.png",
+            name: 'Therian/Otherkin',
+            id: 'therian-otherkin',
+            icon: 'https://api.yipnyap.me/vault/@server/uploads/groups/62/avatars/1689289531-bpfull.png',
         },
         {
-            name: "mariah carey support group",
-            id: "mariah-carey-support-group",
-            icon: "https://api.yipnyap.me/vault/@server/uploads/groups/31/avatars/1671430179-bpfull.png",
+            name: 'mariah carey support group',
+            id: 'mariah-carey-support-group',
+            icon: 'https://api.yipnyap.me/vault/@server/uploads/groups/31/avatars/1671430179-bpfull.png',
         },
         {
-            name: "OC Lore",
-            id: "oc-lore-discussion",
-            icon: "https://api.yipnyap.me/vault/@server/uploads/groups/17/avatars/1667917892-bpfull.png",
+            name: 'OC Lore',
+            id: 'oc-lore-discussion',
+            icon: 'https://api.yipnyap.me/vault/@server/uploads/groups/17/avatars/1667917892-bpfull.png',
         },
         {
-            id: "oc-reference-share",
-            name: "OC Reference Share",
-            icon: "https://api.yipnyap.me/vault/@server/uploads/groups/10/avatars/1667840041-bpfull.png",
+            id: 'oc-reference-share',
+            name: 'OC Reference Share',
+            icon: 'https://api.yipnyap.me/vault/@server/uploads/groups/10/avatars/1667840041-bpfull.png',
         },
         {
-            id: "sfw-art-commissions",
-            name: "SFW Art Commissions",
-            icon: "https://api.yipnyap.me/vault/@server/uploads/groups/7/avatars/1667776775-bpfull.png",
+            id: 'sfw-art-commissions',
+            name: 'SFW Art Commissions',
+            icon: 'https://api.yipnyap.me/vault/@server/uploads/groups/7/avatars/1667776775-bpfull.png',
         },
         {
-            id: "foxes-every-day",
-            name: "Foxes Every Day",
-            icon: "https://api.yipnyap.me/vault/@server/uploads/groups/19/avatars/1667929898-bpfull.jpg",
+            id: 'foxes-every-day',
+            name: 'Foxes Every Day',
+            icon: 'https://api.yipnyap.me/vault/@server/uploads/groups/19/avatars/1667929898-bpfull.jpg',
         },
         {
-            name: "Car Furs",
-            id: "car-furs",
-            icon: "https://api.yipnyap.me/vault/@server/uploads/groups/18/cover-image/636a8b9646a9d-yp-cover-image.jpg",
+            name: 'Car Furs',
+            id: 'car-furs',
+            icon: 'https://api.yipnyap.me/vault/@server/uploads/groups/18/cover-image/636a8b9646a9d-yp-cover-image.jpg',
         },
         {
-            name: "Rhythm Game Furs",
-            id: "rhythm-game-furs",
-            icon: "https://api.yipnyap.me/vault/@server/uploads/groups/16/avatars/1667916953-bpfull.jpg",
+            name: 'Rhythm Game Furs',
+            id: 'rhythm-game-furs',
+            icon: 'https://api.yipnyap.me/vault/@server/uploads/groups/16/avatars/1667916953-bpfull.jpg',
         },
         {
-            name: "The Critique Place",
-            id: "the-critique-place",
-            icon: "https://api.yipnyap.me/vault/@server/uploads/groups/13/avatars/1667857287-bpfull.png",
+            name: 'The Critique Place',
+            id: 'the-critique-place',
+            icon: 'https://api.yipnyap.me/vault/@server/uploads/groups/13/avatars/1667857287-bpfull.png',
         },
         {
-            name: "A Goofy Silly Little Place",
-            id: "a-goofy-silly-little-place",
-            icon: "https://api.yipnyap.me/vault/@server/uploads/groups/5/avatars/1667762903-bpfull.jpg",
+            name: 'A Goofy Silly Little Place',
+            id: 'a-goofy-silly-little-place',
+            icon: 'https://api.yipnyap.me/vault/@server/uploads/groups/5/avatars/1667762903-bpfull.jpg',
         },
         {
-            name: "Yipnyap Feedback",
+            name: 'Yipnyap Feedback',
             id: 'yipnyap-feedback',
-            icon: "https://api.yipnyap.me/vault/@server/uploads/groups/2/avatars/1668149891-bpfull.png",
+            icon: 'https://api.yipnyap.me/vault/@server/uploads/groups/2/avatars/1668149891-bpfull.png',
         }
     ]
 
@@ -139,13 +139,13 @@ export default function ResourceSwitcher() {
             if (resource.standalone) {
                 setLoading(false)
                 setAnimationPlaying(false)
-                playSound(heavyHoverSound)
+                // playSound(heavyHoverSound)
                 return
             }
 
             fetcher(`${process.env.NEXT_PUBLIC_YIPNYAP_CORE_URL}/v2/groups/${resource.id}`).then((res) => {
                 if (res.E2ID) {
-                    playSound(heavyHoverSound)
+                    // playSound(heavyHoverSound)
                 } else {
                     toast.error('The resource is experiencing an outage.', {
                         description: `"${resource!.name}" is not available. You have been switched back to the Universe.`,
@@ -168,12 +168,21 @@ export default function ResourceSwitcher() {
         }
     }
 
+    const shuffleArray = (array: any[]) => {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]]
+        }
+        return array
+    }
+
     useEffect(() => {
         if (typeof window !== 'undefined') {
             setDomReady(true)
         }
     }, [])
 
+    const rows = shuffleArray([7, 6, 5, 5]);
     return (
         <>
             {domReady ? (
@@ -196,9 +205,12 @@ export default function ResourceSwitcher() {
                         ) : (
                             <Resource name={currentResource.name} id={currentResource.id} icon={currentResource.icon}/>
                         )}
-                        <div className={`absolute ${isComponentVisible ? 'top-[15px]' : 'top-6'} transition-all right-0`}>
-                            <ExpandingArrow className={`${isComponentVisible ? '!opacity-0' : ''} w-6 h-6 right-0 text-neutral-500 transition-all dark:text-white`}/>
-                            <XIcon className={`${isComponentVisible ? 'opacity-1' : 'opacity-0'} w-6 h-6 right-0 text-neutral-500 transition-opacity dark:text-white`}/>
+                        <div
+                            className={`absolute ${isComponentVisible ? 'top-[15px]' : 'top-6'} transition-all right-0`}>
+                            <ExpandingArrow
+                                className={`${isComponentVisible ? '!opacity-0' : ''} w-6 h-6 right-0 text-neutral-500 transition-all dark:text-white`}/>
+                            <XIcon
+                                className={`${isComponentVisible ? 'opacity-1' : 'opacity-0'} w-6 h-6 right-0 text-neutral-500 transition-opacity dark:text-white`}/>
                         </div>
                     </span>
 
@@ -207,8 +219,46 @@ export default function ResourceSwitcher() {
                         <div
                             className={`absolute top-0 left-0 ${isComponentVisible ? 'h-screen' : 'h-full opacity-0 group-hover:opacity-100'} transition-all bg-white border-b w-full rounded rounded-tr-none rounded-tl-none shadow-sm pt-[64px] dark:bg-n-7`}>
                             {isComponentVisible && (
-                                <div className="relative h-full switcher-list-stagger overflow-y-auto">
+                                <div
+                                    className="relative h-full switcher-list-stagger overflow-y-auto overflow-x-hidden">
                                     <div className="flex flex-col">
+                                        {/* "Your groups live here" upsell */}
+                                        <div className="flex flex-col">
+                                            {/* Behold, over-engineered upsell */}
+                                            <div className="relative">
+                                                <div className="flex flex-col space-x-[-1px]">
+                                                    {[...Array(3)].map((_, i) => (
+                                                        // Fade to black on bottom
+                                                        <div key={i}
+                                                             className={`flex flex-row justify-between ${i !== 0 && '-mt-4'}`}
+                                                             style={{
+                                                                 zIndex: i + 1,
+                                                                 ...(i !== 2 && {
+                                                                     maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 35%, rgba(0,0,0,0.3))',
+                                                                 })
+                                                             }}
+                                                        >
+                                                            {[...Array(rows[i])].map((_: any, i: Key) => (
+                                                                <UserAvatar key={i}
+                                                                            name={Math.random().toString(36).substring(7)}
+                                                                            size={40}
+                                                                            className="inline-flex rounded overflow-hidden border"
+                                                                            style={{
+                                                                                rotate: `${Math.floor(Math.random() * 10) - 5}deg`,
+                                                                            }} />
+                                                            ))}
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                            <div className="px-5 py-3">
+                                                <Heading className="font-bold">Your packs live here</Heading>
+                                                <Text className="text-alt">
+                                                    Each pack has their own chat, feed channels, and more. Switch between them
+                                                    here, anytime.
+                                                </Text>
+                                            </div>
+                                        </div>
                                         {availableResources.map((resource) => {
                                             if (resource.id === currentResource.id) return null
                                             return (
