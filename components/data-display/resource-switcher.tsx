@@ -187,7 +187,7 @@ export default function ResourceSwitcher() {
                          if (!isComponentVisible) playSound(initialSound)
                          setIsComponentVisible(!isComponentVisible)
                      }}>
-                    <span className="flex z-10 w-full justify-between items-center">
+                    <span className="relative flex z-10 w-full justify-between items-center">
                         {!currentResource || currentResource.standalone ? (
                             <div className="flex h-10 items-center space-x-2">
                                 <Logo className="w-8 h-8"/>
@@ -196,7 +196,10 @@ export default function ResourceSwitcher() {
                         ) : (
                             <Resource name={currentResource.name} id={currentResource.id} icon={currentResource.icon}/>
                         )}
-                        <ChevronDownIcon className="w-6 h-6 text-neutral-500 dark:text-white"/>
+                        <div className={`absolute ${isComponentVisible ? 'top-[15px]' : 'top-6'} transition-all right-0`}>
+                            <ExpandingArrow className={`${isComponentVisible ? '!opacity-0' : ''} w-6 h-6 right-0 text-neutral-500 transition-all dark:text-white`}/>
+                            <XIcon className={`${isComponentVisible ? 'opacity-1' : 'opacity-0'} w-6 h-6 right-0 text-neutral-500 transition-opacity dark:text-white`}/>
+                        </div>
                     </span>
 
                     {/* switcher */}
