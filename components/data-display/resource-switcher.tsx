@@ -134,11 +134,15 @@ export default function ResourceSwitcher() {
         if (ref.current) {
             ref.current.classList.add('before:animate-shimmer-fast')
             setTimeout(() => {
-                // dummy
-                // setCurrentResource(resourceDefault)
+                if (resource.standalone) {
+                    setLoading(false)
+                    playSound(heavyHoverSound)
+                    ref.current.classList.remove('before:animate-shimmer-fast')
+                    return
+                }
+
                 fetcher(`${process.env.NEXT_PUBLIC_YIPNYAP_CORE_URL}/v2/groups/${resource.id}`).then((res) => {
                     if (res.E2ID) {
-                        setCurrentResource(resource)
                         playSound(heavyHoverSound)
                     } else {
                         toast.error('The resource is experiencing an outage.', {
