@@ -33,7 +33,7 @@ export default function Sidebar({navigation}: {
 
             <div>
                 {navigation.map((item) => (
-                    <Link key={item.name} href={item.href}
+                    <Link key={item.name} href="/[slug]" as={item.href}
                           className="flex items-center w-full px-6 py-1 mb-0.5 cursor-pointer hover:bg-n-3/50 dark:hover:bg-n-7/50">
                         <div className="flex items-center">
                             <div>
