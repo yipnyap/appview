@@ -25,8 +25,6 @@ export const metadata = {
       "A place for furries that isn't stuck in 2005.",
     creator: "Wolfbite Labs",
   },
-  metadataBase: new URL("https://yipnyap.me"),
-  themeColor: "#FFF",
 };
 
 export default async function RootLayout({
