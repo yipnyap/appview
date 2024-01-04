@@ -17,6 +17,7 @@ const nextConfig = {
   },
   env: {
     NEXT_PUBLIC_COMMIT_HASH: commitHash,
+    NEXT_PUBLIC_ROOT_DOMAIN: process.env.NEXT_PUBLIC_ROOT_DOMAIN,
   },
   i18n: {
     locales: ['en-US'],
