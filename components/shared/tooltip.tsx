@@ -3,12 +3,10 @@
 import { ReactNode } from "react";
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 
-export default function Tooltip({
-  children,
-  content,
-}: {
-  children: ReactNode;
-  content: ReactNode | string;
+export default function Tooltip({children, content, side}: {
+    children: ReactNode;
+    content: ReactNode | string;
+    side?: 'top' | 'bottom' | 'left' | 'right';
 }) {
   return (
       <TooltipPrimitive.Provider delayDuration={100}>
@@ -18,8 +16,8 @@ export default function Tooltip({
           </TooltipPrimitive.Trigger>
           <TooltipPrimitive.Content
               sideOffset={4}
-              side="top"
-              className="z-30 hidden animate-slide-up-fade items-center rounded-md border border-default bg-n-1 dark:bg-n-7 drop-shadow-lg sm:block"
+              side={side || 'top'}
+              className="z-30 hidden items-center rounded-md border border-default bg-n-1 dark:bg-n-7 drop-shadow-lg sm:block"
           >
             {typeof content === "string" ? (
                 <div className="px-2 py-1.5">

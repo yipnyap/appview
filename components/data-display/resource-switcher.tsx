@@ -8,12 +8,13 @@ import useComponentVisible from '@/lib/hooks/use-component-visible'
 import useSound from 'use-sound'
 import {PlayFunction} from 'use-sound/dist/types'
 import {toast} from '@/lib/toast'
-import {useCurrentEditor} from '@tiptap/react'
 import {useResourceStore, useResourceUIStore} from '@/lib/states'
 import {Key, useEffect, useState} from 'react'
-import {ExpandingArrow, LoadingCircle, LoadingSpinner} from '@/components/shared/icons'
+import {ExpandingArrow, LoadingCircle} from '@/components/shared/icons'
 import {fetcher} from '@/lib/utils'
 import {XIcon} from 'lucide-react'
+import Tooltip from '@/components/shared/tooltip'
+import {ExclamationTriangleIcon} from '@heroicons/react/24/solid'
 
 export default function ResourceSwitcher() {
     // sound refs
@@ -43,21 +44,25 @@ export default function ResourceSwitcher() {
         standalone?: boolean;
         icon?: string;
         unavailable?: boolean;
+        possiblyUnavailable?: boolean;
     }[]>([
         resourceDefault,
         {
             id: 'floodchat',
             name: 'The Flood Chat',
             icon: 'https://cdn.discordapp.com/icons/333623134152294401/4352917374ecb07503ef9022a75de44d.webp?size=96',
+            possiblyUnavailable: true
         },
         {
             id: 'rjojw',
             name: 'Rek\'s... slay\'s',
-            icon: 'https://cdn.discordapp.com/icons/1116547738629320774/e9d8187dba27013aece701d6a43b16a4.webp?size=96'
+            icon: 'https://cdn.discordapp.com/icons/1116547738629320774/e9d8187dba27013aece701d6a43b16a4.webp?size=96',
+            possiblyUnavailable: true
         },
         {
             id: 'sozlol',
             name: 'These aren\'t real',
+            possiblyUnavailable: true
         },
 
         // taken from https://api.yipnyap.me/api/v2/member/1/groups
@@ -241,10 +246,10 @@ export default function ResourceSwitcher() {
                             className={`absolute top-0 left-0 ${isComponentVisible ? 'h-screen' : 'h-full opacity-0 group-hover:opacity-100'} transition-all bg-white border-b w-full rounded rounded-tr-none rounded-tl-none shadow-sm pt-[64px] dark:bg-n-7`}>
                             {isComponentVisible && (
                                 <div
-                                    className="relative h-full switcher-list-stagger overflow-y-auto overflow-x-hidden">
+                                    className="h-full switcher-list-stagger overflow-y-auto overflow-x-visible">
                                     <div className="flex flex-col">
                                         {/* "Your groups live here" upsell */}
-                                        <div className="flex flex-col">
+                                        <div className="relative w-full overflow-hidden flex flex-col">
                                             {/* Behold, over-engineered upsell */}
                                             <div className="relative">
                                                 <div className="flex flex-col space-x-[-1px]">
@@ -284,7 +289,7 @@ export default function ResourceSwitcher() {
                                         {availableResources.map((resource) => {
                                             if (resource.id === currentResource.id) return null
                                             return (
-                                                <div key={resource.id} className={`flex flex-col ${resource.unavailable && '!opacity-50'}`}
+                                                <div key={resource.id} className={`flex flex-col hover:z-50`}
                                                      onClick={(e) => {
                                                          if (resource.unavailable) {
                                                              e.stopPropagation()
@@ -307,10 +312,32 @@ export default function ResourceSwitcher() {
                                                     )}
 
                                                     {!resource.standalone && (
-                                                        <div className="py-3 px-5 hover:bg-hover cursor-pointer">
-                                                            <Resource name={resource.name} id={resource.id}
-                                                                      icon={resource.icon}/>
-                                                        </div>
+                                                        <Tooltip key={resource.id}
+                                                                 content={resource.unavailable ? 'Unavailable' : null}>
+                                                            <div
+                                                                className={`flex py-3 px-5 items-center justify-between ${resource.unavailable && '!opacity-50'} hover:bg-hover cursor-pointer`}>
+                                                                <Resource name={resource.name} id={resource.id}
+                                                                          icon={resource.icon}/>
+                                                                {(resource.possiblyUnavailable && !resource.unavailable) && (
+                                                                    <Tooltip
+                                                                        content={<div className="px-2 py-1.5" style={{
+                                                                            zIndex: 99,
+                                                                            whiteSpace: 'pre-line',
+                                                                            width: '14.75rem'
+                                                                        }}>
+                                                                            <Text className="font-bold">Possibly
+                                                                                Unavailable</Text>
+                                                                            <Text className="text-alt">
+                                                                                It's experiencing an outage, or may no
+                                                                                longer exist.
+                                                                            </Text>
+                                                                        </div>} side="left">
+                                                                        <ExclamationTriangleIcon
+                                                                            className="w-5 h-5 text-yellow-500"/>
+                                                                    </Tooltip>
+                                                                )}
+                                                            </div>
+                                                        </Tooltip>
                                                     )}
                                                 </div>
                                             )
