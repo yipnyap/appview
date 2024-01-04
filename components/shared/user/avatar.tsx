@@ -22,7 +22,7 @@ export default function UserAvatar({ user, size, avatar, ...props }: {
 
     if ((!user || !user.avatar) && !avatar) {
         return (
-            <div className={props.className} style={props.style}>
+            <div className={props.className} style={props.style} title={`${props.name}'s avatar`}>
                 <BoringAvatar variant="beam" square size={typeof size === 'number' ? size : 32} {...props} />
             </div>
         )

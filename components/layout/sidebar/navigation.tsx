@@ -6,7 +6,7 @@ import {Text} from '@/components/shared/text'
 import {useState} from 'react'
 
 export default function Navigation() {
-    const [items, setItems] = useState<{
+    const [items] = useState<{
         name: string;
         href: string;
         icon: LucideIcon;

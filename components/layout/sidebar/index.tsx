@@ -1,5 +1,4 @@
-import {Text} from '@/components/shared/text'
-import {BellIcon, HomeIcon, PenSquareIcon} from 'lucide-react'
+import {PenSquareIcon} from 'lucide-react'
 import Link from 'next/link'
 import ResourceSwitcher from '@/components/data-display/resource-switcher'
 import Navigation from '@/components/layout/sidebar/navigation'

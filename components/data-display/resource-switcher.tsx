@@ -1,6 +1,5 @@
 'use client'
 
-import {ChevronDownIcon} from '@heroicons/react/20/solid'
 import {Logo} from '@/components/shared/icons/logo'
 import {Heading, Text} from '@/components/shared/text'
 import UserAvatar from '@/components/shared/user/avatar'
@@ -165,7 +164,7 @@ export default function ResourceSwitcher() {
 
                 setLoading(false)
                 setAnimationPlaying(false)
-            }).catch((err) => {
+            }).catch(() => {
                 toast.error('The resource is experiencing an outage.', {
                     description: `"${resource!.name}" is not available. You have been switched back to the Universe.`,
                 })
@@ -328,7 +327,8 @@ export default function ResourceSwitcher() {
                                                                             <Text className="font-bold">Possibly
                                                                                 Unavailable</Text>
                                                                             <Text className="text-alt">
-                                                                                It's experiencing an outage, or may no
+                                                                                It&apos;s experiencing an outage, or may
+                                                                                no
                                                                                 longer exist.
                                                                             </Text>
                                                                         </div>} side="left">
